@@ -64,7 +64,7 @@ export default function ClickableImage({
       <Image
         alt={alt ?? ""}
         fill={fill}
-        className={`object-cover ${className}`}
+        className={className || (fill ? "object-cover" : "")}
         {...imageProps}
       />
       <span

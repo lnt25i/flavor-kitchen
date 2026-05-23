@@ -105,6 +105,27 @@
     );
     pointer-events: none;
   }
+
+  .gallery-item {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.98);
+    transition:
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gallery-item-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .gallery-item:nth-child(2n) {
+    transition-delay: 40ms;
+  }
+
+  .gallery-item:nth-child(3n) {
+    transition-delay: 80ms;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -117,5 +138,14 @@
   .scroll-reveal-visible {
     transform: none;
     filter: none;
+  }
+
+  .gallery-item {
+    transform: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .gallery-item-visible {
+    transform: none;
   }
 }
