@@ -3,27 +3,27 @@
 import { useCallback } from "react";
 import { animate } from "animejs";
 import { site, truckMenu } from "@/lib/data";
-import { menuItemCaption } from "@/lib/menu";
-import { fadeUp, staggerFadeUp } from "@/lib/anime/presets";
+import { hoverImageBrightness } from "@/lib/anime/hover";
+import { bounceIn, fadeUp, staggerFadeUp } from "@/lib/anime/presets";
+import { getAllMenuLightboxSlides } from "@/lib/menu-photos";
+import { menuItemCaption, hasMenuPrice } from "@/lib/menu";
 import { useAnimeInView } from "@/hooks/useAnimeInView";
 import ClickableImage from "./lightbox/ClickableImage";
-import type { LightboxSlide } from "@/lib/lightbox";
+import { findLightboxIndex } from "@/lib/menu-photos";
 
-const showcaseSlides: LightboxSlide[] = truckMenu.map((item) => ({
-  src: item.image,
-  title: item.name,
-  description: menuItemCaption(item),
-}));
+const allSlides = getAllMenuLightboxSlides();
 
-function handleCardHover(el: HTMLElement, entering: boolean) {
-  animate(el, {
-    scale: entering ? 1.03 : 1,
+function handleCardHover(card: HTMLElement, entering: boolean) {
+  animate(card, {
+    scale: entering ? 1.04 : 1,
     boxShadow: entering
-      ? "0 16px 48px rgba(0, 0, 0, 0.45)"
+      ? "0 20px 56px rgba(0, 0, 0, 0.5)"
       : "0 8px 32px rgba(0, 0, 0, 0.24)",
     duration: 200,
     ease: "outCubic",
   });
+  const img = card.querySelector("img");
+  if (img) hoverImageBrightness(img, entering);
 }
 
 export default function MenuShowcaseSection() {
@@ -32,6 +32,8 @@ export default function MenuShowcaseSection() {
     useCallback((el) => {
       const cards = Array.from(el.querySelectorAll("[data-menu-card]")) as Element[];
       staggerFadeUp(cards, 60);
+      const prices = Array.from(el.querySelectorAll("[data-price]")) as Element[];
+      if (prices.length) bounceIn(prices, 120);
     }, [])
   );
 
@@ -57,7 +59,7 @@ export default function MenuShowcaseSection() {
           ref={gridRef as React.RefObject<HTMLDivElement>}
           className="mt-14 grid grid-cols-1 gap-8 opacity-0 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {truckMenu.map((item, index) => (
+          {truckMenu.map((item) => (
             <article
               key={item.number}
               data-menu-card
@@ -69,15 +71,16 @@ export default function MenuShowcaseSection() {
                 handleCardHover(e.currentTarget as HTMLElement, false)
               }
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-rich-black">
                 <ClickableImage
                   src={item.image}
                   alt={item.name}
                   title={item.name}
                   caption={menuItemCaption(item)}
-                  slides={showcaseSlides}
-                  slideIndex={index}
+                  slides={allSlides}
+                  slideIndex={findLightboxIndex(item.image)}
                   fill
+                  unoptimized
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-contain"
                   wrapperClassName="h-full w-full"
@@ -93,8 +96,11 @@ export default function MenuShowcaseSection() {
                     {item.description}
                   </p>
                 ) : null}
-                {item.price ? (
-                  <p className="mt-4 font-sans text-lg font-semibold text-orange">
+                {hasMenuPrice(item) ? (
+                  <p
+                    data-price
+                    className="mt-4 font-sans text-lg font-semibold text-orange opacity-0"
+                  >
                     {item.price}
                   </p>
                 ) : null}

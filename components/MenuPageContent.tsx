@@ -2,14 +2,21 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import { animate } from "animejs";
-import { truckMenu } from "@/lib/data";
+import { hoverImageBrightness } from "@/lib/anime/hover";
+import { staggerFadeUp } from "@/lib/anime/presets";
+import {
+  findLightboxIndex,
+  getAllMenuLightboxSlides,
+  getAllMenuPhotos,
+} from "@/lib/menu-photos";
 import { hasMenuPrice, menuItemCaption } from "@/lib/menu";
-import { scaleIn } from "@/lib/anime/presets";
 import ClickableImage from "./lightbox/ClickableImage";
-import type { LightboxSlide } from "@/lib/lightbox";
 
-function handleCardHover(el: HTMLElement, entering: boolean) {
-  animate(el, {
+const allSlides = getAllMenuLightboxSlides();
+const allPhotos = getAllMenuPhotos();
+
+function handleCardHover(card: HTMLElement, entering: boolean) {
+  animate(card, {
     scale: entering ? 1.02 : 1,
     boxShadow: entering
       ? "0 16px 48px rgba(0, 0, 0, 0.45)"
@@ -17,13 +24,9 @@ function handleCardHover(el: HTMLElement, entering: boolean) {
     duration: 200,
     ease: "outCubic",
   });
+  const img = card.querySelector("img");
+  if (img) hoverImageBrightness(img, entering);
 }
-
-const menuSlides: LightboxSlide[] = truckMenu.map((item) => ({
-  src: item.image,
-  title: `#${item.number} ${item.name}`,
-  description: menuItemCaption(item),
-}));
 
 export default function MenuPageContent() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -32,7 +35,10 @@ export default function MenuPageContent() {
   const animateCards = useCallback(() => {
     const grid = gridRef.current;
     if (!grid) return;
-    scaleIn(Array.from(grid.querySelectorAll("[data-menu-card]")) as Element[], 50);
+    staggerFadeUp(
+      Array.from(grid.querySelectorAll("[data-menu-card]")) as Element[],
+      50
+    );
   }, []);
 
   useEffect(() => {
@@ -58,17 +64,17 @@ export default function MenuPageContent() {
     <section className="section-dark section-spacious">
       <div className="container-narrow">
         <p className="text-center text-sm text-cream/50">
-          Ten items from the truck wrap — tap any photo to enlarge.
+          All twenty owner menu photos — two styles per item. Tap to enlarge.
         </p>
         <div
           ref={gridRef}
-          className="mt-12 grid gap-8 opacity-0 sm:grid-cols-2"
+          className="mt-12 grid gap-6 opacity-0 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {truckMenu.map((item, i) => (
+          {allPhotos.map((photo) => (
             <article
-              key={item.number}
+              key={photo.src}
               data-menu-card
-              className="overflow-hidden rounded-2xl border border-cream/10 bg-cream shadow-soft"
+              className="overflow-hidden rounded-2xl border border-cream/10 opacity-0 shadow-soft"
               onMouseEnter={(e) =>
                 handleCardHover(e.currentTarget as HTMLElement, true)
               }
@@ -76,30 +82,41 @@ export default function MenuPageContent() {
                 handleCardHover(e.currentTarget as HTMLElement, false)
               }
             >
-              <div className="relative w-full">
+              <div
+                className={`relative w-full ${
+                  photo.variant === "light" ? "bg-cream" : "bg-rich-black"
+                }`}
+              >
                 <ClickableImage
-                  src={item.image}
-                  alt={item.name}
-                  title={`#${item.number} ${item.name}`}
-                  caption={menuItemCaption(item)}
-                  slides={menuSlides}
-                  slideIndex={i}
+                  src={photo.src}
+                  alt={photo.item.name}
+                  title={`#${photo.item.number} ${photo.item.name}`}
+                  caption={menuItemCaption(photo.item)}
+                  slides={allSlides}
+                  slideIndex={findLightboxIndex(photo.src)}
                   width={600}
                   height={600}
+                  unoptimized
                   className="h-auto w-full object-contain"
                   wrapperClassName="w-full"
                 />
               </div>
-              <div className="border-t border-cream/10 bg-rich-black px-6 py-5">
-                <p className="text-eyebrow">#{item.number}</p>
+              <div className="border-t border-cream/10 px-6 py-5">
+                <p className="text-eyebrow">
+                  #{photo.item.number} · {photo.variant}
+                </p>
                 <h3 className="mt-1 font-display text-xl text-cream">
-                  {item.name}
+                  {photo.item.name}
                 </h3>
-                {item.description ? (
-                  <p className="text-lead mt-2 !text-sm">{item.description}</p>
+                {photo.item.description ? (
+                  <p className="text-lead mt-2 !text-sm">
+                    {photo.item.description}
+                  </p>
                 ) : null}
-                {hasMenuPrice(item) ? (
-                  <p className="mt-3 font-semibold text-orange">{item.price}</p>
+                {hasMenuPrice(photo.item) ? (
+                  <p className="mt-3 font-semibold text-orange">
+                    {photo.item.price}
+                  </p>
                 ) : null}
               </div>
             </article>

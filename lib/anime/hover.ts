@@ -14,6 +14,18 @@ export function hoverImageOverlay(
   });
 }
 
+/** Brighten food photo on card hover. */
+export function hoverImageBrightness(
+  target: Element,
+  entering: boolean
+): JSAnimation {
+  return animate(target, {
+    filter: entering ? "brightness(1.08)" : "brightness(1)",
+    duration: 200,
+    ease: "outCubic",
+  });
+}
+
 /** Nav / text link color on hover. */
 export function hoverLinkColor(
   target: Element,
@@ -24,6 +36,21 @@ export function hoverLinkColor(
   return animate(target, {
     color: entering ? hoverColor : idleColor,
     duration: 200,
+    ease: "outCubic",
+  });
+}
+
+/** Gallery name overlay on hover. */
+export function hoverGalleryCaption(
+  target: Element,
+  entering: boolean
+): JSAnimation {
+  return animate(target, {
+    opacity: entering ? 1 : 0,
+    backgroundColor: entering
+      ? "rgba(13, 13, 13, 0.45)"
+      : "rgba(13, 13, 13, 0)",
+    duration: 280,
     ease: "outCubic",
   });
 }

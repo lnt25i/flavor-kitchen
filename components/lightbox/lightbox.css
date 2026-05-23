@@ -3,19 +3,40 @@
 }
 
 .yarl__slide_title {
+  display: none;
+}
+
+.yarl__slide_description {
+  display: none;
+}
+
+.yarl-custom-caption {
+  text-align: center;
+  padding: 0 1rem 1.5rem;
+}
+
+.yarl-custom-caption__title {
   font-family: var(--font-playfair), Georgia, serif;
   color: #fff8f0;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
-.yarl__slide_description {
+.yarl-custom-caption__price {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: #ff6b35;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
+.yarl-custom-caption__desc {
   font-family: var(--font-inter), system-ui, sans-serif;
   color: rgba(255, 248, 240, 0.65);
   font-size: 0.875rem;
   max-width: 36rem;
-  margin: 0.25rem auto 0;
+  margin: 0.35rem auto 0;
 }
 
 .yarl__button {

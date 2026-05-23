@@ -12,6 +12,7 @@ type ClickableImageProps = Omit<ImageProps, "onClick"> & {
   slides?: LightboxSlide[];
   slideIndex?: number;
   wrapperClassName?: string;
+  price?: string | null;
 };
 
 export default function ClickableImage({
@@ -20,6 +21,7 @@ export default function ClickableImage({
   slides,
   slideIndex = 0,
   wrapperClassName = "",
+  price,
   alt,
   fill,
   className = "",
@@ -33,6 +35,7 @@ export default function ClickableImage({
     src,
     title: title ?? (typeof alt === "string" ? alt : undefined),
     description: caption ?? (typeof alt === "string" ? alt : undefined),
+    price,
   };
 
   function handleOpen() {

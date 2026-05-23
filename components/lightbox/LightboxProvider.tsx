@@ -11,6 +11,7 @@ import {
 import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { animate } from "animejs";
+import { lightboxSlideIn } from "@/lib/anime/presets";
 import type { LightboxSlide } from "@/lib/lightbox";
 import "yet-another-react-lightbox/styles.css";
 import "./lightbox.css";
@@ -25,6 +26,17 @@ export function useLightbox() {
   const ctx = useContext(LightboxContext);
   if (!ctx) throw new Error("useLightbox must be used within LightboxProvider");
   return ctx;
+}
+
+function animateLightboxImage() {
+  const img = document.querySelector(
+    ".yarl__slide_image, .yarl__slide img"
+  ) as HTMLElement | null;
+  if (img) {
+    img.style.opacity = "0";
+    img.style.transform = "scale(0.96)";
+    lightboxSlideIn(img);
+  }
 }
 
 export default function LightboxProvider({ children }: { children: ReactNode }) {
@@ -53,8 +65,15 @@ export default function LightboxProvider({ children }: { children: ReactNode }) 
           ease: "outCubic",
         });
       }
+      animateLightboxImage();
     };
     const t = window.setTimeout(runFade, 10);
+    return () => window.clearTimeout(t);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const t = window.setTimeout(animateLightboxImage, 40);
     return () => window.clearTimeout(t);
   }, [open, index]);
 
@@ -62,6 +81,7 @@ export default function LightboxProvider({ children }: { children: ReactNode }) 
     src: s.src,
     title: s.title,
     description: s.description,
+    price: s.price,
   }));
 
   return (
@@ -86,6 +106,24 @@ export default function LightboxProvider({ children }: { children: ReactNode }) 
         render={{
           buttonPrev: slides.length <= 1 ? () => null : undefined,
           buttonNext: slides.length <= 1 ? () => null : undefined,
+          slideFooter: ({ slide }) => {
+            const s = slide as { title?: string; description?: string; price?: string | null };
+            return (
+              <div className="yarl-custom-caption">
+                {s.title ? (
+                  <p className="yarl-custom-caption__title">{s.title}</p>
+                ) : null}
+                {s.price ? (
+                  <p className="yarl-custom-caption__price">{s.price}</p>
+                ) : null}
+                {s.description && !s.price ? (
+                  <p className="yarl-custom-caption__desc">{s.description}</p>
+                ) : s.description && s.price ? (
+                  <p className="yarl-custom-caption__desc">{s.description}</p>
+                ) : null}
+              </div>
+            );
+          },
         }}
       />
     </LightboxContext.Provider>

@@ -156,3 +156,27 @@ export function slideUnderline(
     ease: "outCubic",
   });
 }
+
+/** Gallery cascade — enter from above with stagger. */
+export function cascadeFromTop(
+  targets: string | Element | Element[],
+  staggerMs = 50
+): JSAnimation {
+  return animate(targets, {
+    opacity: [0, 1],
+    translateY: [-32, 0],
+    duration: 650,
+    delay: stagger(staggerMs),
+    ease: "outCubic",
+  });
+}
+
+/** Lightbox slide transition. */
+export function lightboxSlideIn(target: Element): JSAnimation {
+  return animate(target, {
+    opacity: [0, 1],
+    scale: [0.96, 1],
+    duration: 420,
+    ease: "outCubic",
+  });
+}

@@ -2,9 +2,14 @@
 
 import Link from "next/link";
 import { useCallback } from "react";
-import { chefStory, site } from "@/lib/data";
+import { chefStory, site, truckMenu } from "@/lib/data";
 import { images } from "@/lib/images";
 import { staggerFadeUp } from "@/lib/anime/presets";
+import {
+  findLightboxIndex,
+  getAllMenuLightboxSlides,
+} from "@/lib/menu-photos";
+import { menuItemCaption } from "@/lib/menu";
 import { useAnimeInView } from "@/hooks/useAnimeInView";
 import AnimateInView from "./anime/AnimateInView";
 import SectionHeading from "./anime/SectionHeading";
@@ -24,6 +29,8 @@ const truckSlides = [
     description: images.chef.truck.alt,
   },
 ];
+const menuSlides = getAllMenuLightboxSlides();
+const aboutFoodPhotos = truckMenu.slice(0, 6);
 
 export default function AboutStorySections() {
   const storyRef = useAnimeInView(
@@ -31,6 +38,15 @@ export default function AboutStorySections() {
       staggerFadeUp(
         Array.from(el.querySelectorAll("[data-story-p]")) as Element[],
         140
+      );
+    }, [])
+  );
+
+  const foodRef = useAnimeInView(
+    useCallback((el: HTMLElement) => {
+      staggerFadeUp(
+        Array.from(el.querySelectorAll("[data-about-food]")) as Element[],
+        70
       );
     }, [])
   );
@@ -46,6 +62,7 @@ export default function AboutStorySections() {
             slides={chefSlides}
             width={800}
             height={500}
+            unoptimized
             className="h-auto w-full object-contain"
             wrapperClassName="w-full rounded-2xl shadow-soft"
           />
@@ -77,10 +94,48 @@ export default function AboutStorySections() {
               slides={truckSlides}
               width={1200}
               height={600}
+              unoptimized
               className="h-auto w-full object-contain"
               wrapperClassName="w-full rounded-2xl shadow-soft"
             />
           </AnimateInView>
+        </div>
+      </section>
+
+      <section className="section-dark section-spacious border-t border-cream/10">
+        <div className="container-narrow">
+          <SectionHeading
+            title="From the Window"
+            description="Real food photos from Chef Raben’s menu."
+            light
+          />
+          <div
+            ref={foodRef as React.RefObject<HTMLDivElement>}
+            className="mt-10 grid grid-cols-2 gap-4 opacity-0 sm:grid-cols-3"
+          >
+            {aboutFoodPhotos.map((item) => (
+              <div
+                key={item.number}
+                data-about-food
+                className="overflow-hidden rounded-xl opacity-0 shadow-soft"
+              >
+                <ClickableImage
+                  src={item.image}
+                  alt={item.name}
+                  title={item.name}
+                  caption={menuItemCaption(item)}
+                  price={item.price}
+                  slides={menuSlides}
+                  slideIndex={findLightboxIndex(item.image)}
+                  width={400}
+                  height={400}
+                  unoptimized
+                  className="h-auto w-full object-contain"
+                  wrapperClassName="w-full bg-rich-black"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

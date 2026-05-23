@@ -1,4 +1,4 @@
-import { truckMenu } from "./data";
+import { getAllMenuPhotos } from "./menu-photos";
 
 export const images = {
   hero: {
@@ -21,10 +21,11 @@ export const images = {
       alt: "Flavor Kitchen truck — full menu on the wrap",
     },
   },
-  gallery: truckMenu.map((item) => ({
-    src: item.image,
-    alt: item.name,
-    name: item.name,
+  gallery: getAllMenuPhotos().map((photo) => ({
+    src: photo.src,
+    alt: photo.item.name,
+    name: photo.item.name,
+    variant: photo.variant,
   })),
 } as const;
 

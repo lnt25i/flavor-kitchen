@@ -35,7 +35,12 @@ export interface TruckMenuItem {
   description: string;
   /** // TO BE CONFIRMED BY CHEF RABEN — not shown on truck wrap or menu graphics */
   price: string | null;
+  /** Primary card image (dark variant on dark UI). */
   image: string;
+  photos: {
+    light: string;
+    dark: string;
+  };
 }
 
 export const truckMenu: TruckMenuItem[] = [
@@ -44,70 +49,110 @@ export const truckMenu: TruckMenuItem[] = [
     name: "Chicken Gyro",
     description: "grilled chicken, lettuce, tomato, red onion, tzatziki",
     price: null,
-    image: "/images/menu/01-chicken-gyro.png",
+    image: "/images/menu/01-chicken-gyro-dark.png",
+    photos: {
+      light: "/images/menu/01-chicken-gyro-light.png",
+      dark: "/images/menu/01-chicken-gyro-dark.png",
+    },
   },
   {
     number: 2,
     name: "Green Chicken Wrap",
     description: "chicken, lettuce, tomato, cucumber, house sauce",
     price: null,
-    image: "/images/menu/02-green-chicken-wrap.png",
+    image: "/images/menu/02-green-chicken-wrap-dark.png",
+    photos: {
+      light: "/images/menu/02-green-chicken-wrap-light.png",
+      dark: "/images/menu/02-green-chicken-wrap-dark.png",
+    },
   },
   {
     number: 3,
     name: "Philly Cheesesteak",
     description: "sliced beef, onions, peppers, melted cheese",
     price: null,
-    image: "/images/menu/03-philly-cheesesteak.png",
+    image: "/images/menu/03-philly-cheesesteak-dark.png",
+    photos: {
+      light: "/images/menu/03-philly-cheesesteak-light.png",
+      dark: "/images/menu/03-philly-cheesesteak-dark.png",
+    },
   },
   {
     number: 4,
     name: "Chicken Sandwich",
     description: "chicken filet, lettuce, tomato, pickles, sauce",
     price: null,
-    image: "/images/menu/04-chicken-sandwich.png",
+    image: "/images/menu/04-chicken-sandwich-dark.png",
+    photos: {
+      light: "/images/menu/04-chicken-sandwich-light.png",
+      dark: "/images/menu/04-chicken-sandwich-dark.png",
+    },
   },
   {
     number: 5,
     name: "Raben Classic Burger",
     description: "beef patty, cheese, lettuce, tomato, onion",
     price: null,
-    image: "/images/menu/05-raben-classic-burger.png",
+    image: "/images/menu/05-raben-classic-burger-dark.png",
+    photos: {
+      light: "/images/menu/05-raben-classic-burger-light.png",
+      dark: "/images/menu/05-raben-classic-burger-dark.png",
+    },
   },
   {
     number: 6,
     name: "Hamburger",
     description: "beef patty, lettuce, tomato, onion, pickles",
     price: null,
-    image: "/images/menu/06-hamburger.png",
+    image: "/images/menu/06-hamburger-dark.png",
+    photos: {
+      light: "/images/menu/06-hamburger-light.png",
+      dark: "/images/menu/06-hamburger-dark.png",
+    },
   },
   {
     number: 7,
     name: "Chicken Tacos",
     description: "seasoned chicken, slaw, pico, sauce",
     price: null,
-    image: "/images/menu/07-chicken-tacos.png",
+    image: "/images/menu/07-chicken-tacos-dark.png",
+    photos: {
+      light: "/images/menu/07-chicken-tacos-light.png",
+      dark: "/images/menu/07-chicken-tacos-dark.png",
+    },
   },
   {
     number: 8,
     name: "Fish Tacos",
     description: "fish, slaw, pico, lime crema",
     price: null,
-    image: "/images/menu/08-fish-tacos.png",
+    image: "/images/menu/08-fish-tacos-dark.png",
+    photos: {
+      light: "/images/menu/08-fish-tacos-light.png",
+      dark: "/images/menu/08-fish-tacos-dark.png",
+    },
   },
   {
     number: 9,
     name: "Steak Tacos",
     description: "steak, onion, cilantro, salsa",
     price: null,
-    image: "/images/menu/09-steak-tacos.png",
+    image: "/images/menu/09-steak-tacos-dark.png",
+    photos: {
+      light: "/images/menu/09-steak-tacos-light.png",
+      dark: "/images/menu/09-steak-tacos-dark.png",
+    },
   },
   {
     number: 10,
     name: "Quesadilla",
     description: "melted cheese, peppers, onions, salsa",
     price: null,
-    image: "/images/menu/10-quesadilla.png",
+    image: "/images/menu/10-quesadilla-dark.png",
+    photos: {
+      light: "/images/menu/10-quesadilla-light.png",
+      dark: "/images/menu/10-quesadilla-dark.png",
+    },
   },
 ];
 
