@@ -13,6 +13,7 @@ export default function GalleryPage() {
   return (
     <>
       <PageHeaderReveal
+        compact
         title="Gallery"
         description="Every dish, full screen. Tap any photo to explore."
       />

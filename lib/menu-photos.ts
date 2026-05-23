@@ -64,13 +64,13 @@ export function getAllGalleryPhotos(): GalleryPhotoEntry[] {
       src: item.photos.light,
       variant: "light" as const,
       item,
-      label: `${item.name} — Light`,
+      label: item.name,
     },
     {
       src: item.photos.dark,
       variant: "dark" as const,
       item,
-      label: `${item.name} — Dark`,
+      label: item.name,
     },
   ]);
 }
@@ -87,7 +87,7 @@ export function getAllMenuLightboxSlides(): LightboxSlide[] {
 export function getAllGalleryLightboxSlides(): LightboxSlide[] {
   return getAllGalleryPhotos().map((photo) => ({
     src: photo.src,
-    title: photo.label,
+    title: photo.item.name,
     description: menuItemCaption(photo.item),
     price: photo.item.price,
   }));
