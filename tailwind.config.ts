@@ -19,6 +19,9 @@ const config: Config = {
         display: ["var(--font-playfair)", "Georgia", "serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
+      boxShadow: {
+        soft: "0 8px 32px rgba(0, 0, 0, 0.24)",
+      },
     },
   },
   plugins: [],

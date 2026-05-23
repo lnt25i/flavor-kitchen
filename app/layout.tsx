@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import LightboxProvider from "@/components/lightbox/LightboxProvider";
 import PageTransition from "@/components/anime/PageTransition";
 import StructuredData from "@/components/StructuredData";
 import { homeMetadata } from "@/lib/metadata";
@@ -28,13 +29,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen">
+      <body className="min-h-screen bg-rich-black">
         <StructuredData />
-        <Header />
-        <PageTransition>
-          <main>{children}</main>
-        </PageTransition>
-        <Footer />
+        <LightboxProvider>
+          <Header />
+          <PageTransition>
+            <main>{children}</main>
+          </PageTransition>
+          <Footer />
+        </LightboxProvider>
       </body>
     </html>
   );

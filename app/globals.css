@@ -3,12 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-    @apply bg-cream font-sans text-charcoal antialiased;
+    @apply bg-rich-black font-sans text-cream antialiased;
   }
 
   h1,
@@ -20,19 +16,57 @@
 }
 
 @layer components {
-  .section-padding {
-    @apply px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
+  .section-spacious {
+    @apply px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32;
+  }
+
+  .section-dark {
+    @apply bg-charcoal text-cream;
+  }
+
+  .section-light {
+    @apply bg-cream text-charcoal;
   }
 
   .container-narrow {
-    @apply mx-auto max-w-6xl;
+    @apply mx-auto max-w-5xl;
+  }
+
+  .divider-thin {
+    @apply border-t border-cream/10;
+  }
+
+  .card-premium {
+    @apply rounded-2xl border border-cream/10 bg-charcoal/50 shadow-soft;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-orange px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-cream focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2 focus:ring-offset-cream;
+    @apply inline-flex items-center justify-center rounded-full bg-orange px-8 py-3 text-sm font-medium uppercase tracking-widest text-cream shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-charcoal bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-charcoal focus:outline-none focus:ring-2 focus:ring-charcoal focus:ring-offset-2;
+    @apply inline-flex items-center justify-center rounded-full border border-cream/25 bg-transparent px-8 py-3 text-sm font-medium uppercase tracking-widest text-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-cream/40 focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black;
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center rounded-full border border-charcoal/15 bg-transparent px-8 py-3 text-sm font-medium uppercase tracking-widest text-charcoal focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal/30;
+  }
+
+  .text-eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.25em] text-gold;
+  }
+
+  .text-lead {
+    @apply text-base leading-relaxed text-cream/70 sm:text-lg;
+  }
+
+  .text-lead-dark {
+    @apply text-base leading-relaxed text-charcoal/70 sm:text-lg;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
   }
 }

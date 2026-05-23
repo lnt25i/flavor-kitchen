@@ -3,11 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { animate } from "animejs";
+import {
+  hoverLinkColor,
+  hoverLinkColorActive,
+} from "@/lib/anime/hover";
 import { staggerFromLeft, staggerFromTop } from "@/lib/anime/presets";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/menu", label: "Menu" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/find-us", label: "Find Us" },
   { href: "/contact", label: "Contact" },
@@ -19,10 +25,33 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const desktopNavRef = useRef<HTMLElement>(null);
   const mobileNavRef = useRef<HTMLElement>(null);
+  const mobileOverlayRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const lineTopRef = useRef<HTMLSpanElement>(null);
+  const lineMidRef = useRef<HTMLSpanElement>(null);
+  const lineBotRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const next = window.scrollY > 16;
+      setScrolled((prev) => {
+        if (prev !== next && headerRef.current) {
+          animate(headerRef.current, {
+            backgroundColor: next
+              ? "rgba(13, 13, 13, 0.95)"
+              : "rgba(13, 13, 13, 0)",
+            borderColor: next
+              ? "rgba(255, 248, 240, 0.1)"
+              : "rgba(255, 248, 240, 0)",
+            duration: 250,
+            ease: "outCubic",
+          });
+        }
+        return next;
+      });
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -40,35 +69,78 @@ export default function Header() {
   useEffect(() => {
     const nav = desktopNavRef.current;
     if (!nav) return;
-    const links = nav.querySelectorAll("[data-nav-link]");
-    staggerFromTop(Array.from(links) as Element[], 80);
+    staggerFromTop(
+      Array.from(nav.querySelectorAll("[data-nav-link]")) as Element[],
+      70
+    );
   }, []);
 
   useEffect(() => {
-    if (!menuOpen) return;
-    const nav = mobileNavRef.current;
-    if (!nav) return;
-    const links = nav.querySelectorAll("[data-mobile-link]");
-    staggerFromLeft(Array.from(links) as Element[], 100);
+    if (!menuOpen || !mobileNavRef.current) return;
+    staggerFromLeft(
+      Array.from(mobileNavRef.current.querySelectorAll("[data-mobile-link]")) as Element[],
+      90
+    );
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const overlay = mobileOverlayRef.current;
+    const top = lineTopRef.current;
+    const mid = lineMidRef.current;
+    const bot = lineBotRef.current;
+    if (!overlay || !top || !mid || !bot) return;
+
+    animate(overlay, {
+      opacity: menuOpen ? 1 : 0,
+      duration: 280,
+      ease: "outCubic",
+    });
+
+    if (menuOpen) {
+      animate(top, {
+        translateY: 5,
+        rotate: 45,
+        duration: 280,
+        ease: "outCubic",
+      });
+      animate(mid, { opacity: 0, duration: 200, ease: "outCubic" });
+      animate(bot, {
+        translateY: -5,
+        rotate: -45,
+        duration: 280,
+        ease: "outCubic",
+      });
+    } else {
+      animate(top, {
+        translateY: 0,
+        rotate: 0,
+        duration: 280,
+        ease: "outCubic",
+      });
+      animate(mid, { opacity: 1, duration: 200, ease: "outCubic" });
+      animate(bot, {
+        translateY: 0,
+        rotate: 0,
+        duration: 280,
+        ease: "outCubic",
+      });
+    }
   }, [menuOpen]);
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 ${
-        scrolled || menuOpen
-          ? "bg-charcoal/95 shadow-lg backdrop-blur-md"
-          : "bg-transparent"
+      ref={headerRef}
+      className={`fixed inset-x-0 top-0 z-50 border-b border-transparent ${
+        scrolled || menuOpen ? "shadow-soft backdrop-blur-md" : ""
       }`}
+      style={{ backgroundColor: "rgba(13, 13, 13, 0)" }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5 sm:px-6">
         <Link
           href="/"
-          className="font-display text-lg font-semibold tracking-wide text-cream sm:text-xl"
+          className="font-display text-lg font-semibold tracking-wide text-cream"
         >
           Flavor Kitchen
-          <span className="block text-xs font-sans font-normal tracking-widest text-gold">
-            by Chef Raben
-          </span>
         </Link>
 
         <nav
@@ -76,64 +148,53 @@ export default function Header() {
           className="hidden items-center gap-8 md:flex"
           aria-label="Main"
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              data-nav-link
-              className={`text-sm font-medium uppercase tracking-wider opacity-0 ${
-                pathname === link.href
-                  ? "text-orange"
-                  : "text-cream/90 hover:text-orange"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/find-us"
-            data-nav-link
-            className="btn-primary !py-2.5 !text-xs opacity-0"
-          >
-            Find Us
-          </Link>
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                data-nav-link
+                className="text-xs font-medium uppercase tracking-widest opacity-0"
+                style={{ color: active ? "#FF6B35" : "rgba(255, 248, 240, 0.7)" }}
+                onMouseEnter={(e) => {
+                  if (active) hoverLinkColorActive(e.currentTarget, true);
+                  else hoverLinkColor(e.currentTarget, true);
+                }}
+                onMouseLeave={(e) => {
+                  if (active) hoverLinkColorActive(e.currentTarget, false);
+                  else hoverLinkColor(e.currentTarget, false);
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <button
           type="button"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span
-            className={`block h-0.5 w-6 bg-cream ${
-              menuOpen ? "translate-y-2 rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-cream ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-cream ${
-              menuOpen ? "-translate-y-2 -rotate-45" : ""
-            }`}
-          />
+          <span ref={lineTopRef} className="block h-px w-5 bg-cream" />
+          <span ref={lineMidRef} className="block h-px w-5 bg-cream" />
+          <span ref={lineBotRef} className="block h-px w-5 bg-cream" />
         </button>
       </div>
 
       <div
-        className={`fixed inset-0 top-[72px] bg-charcoal/98 md:hidden ${
-          menuOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+        ref={mobileOverlayRef}
+        className={`fixed inset-0 top-[69px] bg-rich-black md:hidden ${
+          menuOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
+        style={{ opacity: 0 }}
       >
         <nav
           ref={mobileNavRef}
-          className="flex flex-col items-center gap-8 px-4 py-12"
+          className="flex flex-col items-center gap-7 px-4 py-14"
           aria-label="Mobile"
         >
           {navLinks.map((link) => (
@@ -141,20 +202,13 @@ export default function Header() {
               key={link.href}
               href={link.href}
               data-mobile-link
-              className={`font-display text-2xl opacity-0 ${
+              className={`font-display text-xl opacity-0 ${
                 pathname === link.href ? "text-orange" : "text-cream"
               }`}
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/find-us"
-            data-mobile-link
-            className="btn-primary mt-4 opacity-0"
-          >
-            Find Us Today
-          </Link>
         </nav>
       </div>
     </header>

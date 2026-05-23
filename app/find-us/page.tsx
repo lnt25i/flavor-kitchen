@@ -7,17 +7,13 @@ export const metadata: Metadata = findUsMetadata;
 export default function FindUsPage() {
   return (
     <>
-      <section className="bg-rich-black pt-32 pb-16 text-cream">
-        <div className="container-narrow px-4 text-center sm:px-6">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold">
-            Palm Beach County, Florida
-          </p>
-          <h1 className="mt-2 font-display text-4xl font-bold sm:text-5xl">
+      <section className="section-dark border-b border-cream/10 pt-32 pb-16 text-center">
+        <div className="container-narrow px-4">
+          <h1 className="font-display text-4xl font-semibold text-cream sm:text-5xl">
             Find Us
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-cream/80">
-            We move with the county. Follow @Rabenflavorkitchen for daily
-            locations and pop-up announcements.
+          <p className="text-lead mx-auto mt-6 max-w-md">
+            Catch the truck at rotating stops — follow us to know where we&apos;ll be next. No fixed address.
           </p>
         </div>
       </section>

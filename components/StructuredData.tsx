@@ -7,7 +7,7 @@ export default function StructuredData() {
     "@type": "FoodEstablishment",
     name: site.name,
     description:
-      "Chef-led food truck in Palm Beach County, Florida. Five cuisines — Haitian, American, Greek, French, and Caribbean — one unforgettable menu.",
+      "Chef Raben's food truck in West Palm Beach, FL. Bold Flavor. Made Fresh. Gyros, wraps, burgers, tacos, and quesadillas.",
     url: siteUrl,
     email: contact.email,
     servesCuisine: [
@@ -19,7 +19,7 @@ export default function StructuredData() {
     ],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Palm Beach County",
+      addressLocality: "West Palm Beach",
       addressRegion: "FL",
       addressCountry: "US",
     },

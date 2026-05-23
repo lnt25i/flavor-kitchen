@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback } from "react";
-import { hoursOfOperation, site, weeklySchedule } from "@/lib/data";
+import { hoursOfOperation, weeklySchedule } from "@/lib/data";
 import { slideFromLeft, slideFromRight } from "@/lib/anime/presets";
 import { useAnimeInView } from "@/hooks/useAnimeInView";
 import AnimateInView from "./anime/AnimateInView";
@@ -14,117 +14,89 @@ export default function FindUsSchedule() {
       const rows = el.querySelectorAll("[data-schedule-row]");
       rows.forEach((row, i) => {
         const anim = i % 2 === 0 ? slideFromLeft : slideFromRight;
-        anim(row as Element, i * 80);
+        anim(row as Element, i * 70);
       });
     }, [])
   );
 
   return (
     <>
-      <section className="section-padding">
+      <section className="section-dark section-spacious">
         <div className="container-narrow">
           <SectionHeading
-            eyebrow="Service Area"
-            title={site.location}
-            description="Weekly rotations across the county — follow @Rabenflavorkitchen for real-time location updates."
+            title="Weekly Truck Stops"
+            description="Rotating locations across Palm Beach County — follow @RaBenFlavorKitchen for today’s pin. We move; the schedule is your guide, not a single street address."
           />
           <div
             ref={tableRef as React.RefObject<HTMLDivElement>}
-            className="mt-8 overflow-hidden rounded-2xl border border-charcoal/10 bg-white opacity-0 shadow-sm"
+            className="mt-14 overflow-hidden rounded-2xl border border-cream/10 opacity-0 shadow-soft"
           >
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px] text-left text-sm">
-                <thead className="bg-charcoal text-cream">
-                  <tr>
-                    <th className="px-6 py-4 font-semibold uppercase tracking-wider">
-                      Day
-                    </th>
-                    <th className="px-6 py-4 font-semibold uppercase tracking-wider">
-                      Location
-                    </th>
-                    <th className="px-6 py-4 font-semibold uppercase tracking-wider">
-                      Hours
-                    </th>
+            <table className="w-full min-w-[520px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-cream/10 text-xs uppercase tracking-widest text-gold">
+                  <th className="px-6 py-4">Day</th>
+                  <th className="px-6 py-4">Location</th>
+                  <th className="px-6 py-4">Hours</th>
+                </tr>
+              </thead>
+              <tbody>
+                {weeklySchedule.map((row) => (
+                  <tr
+                    key={row.day}
+                    data-schedule-row
+                    className="border-b border-cream/5 opacity-0"
+                  >
+                    <td className="px-6 py-5 font-medium text-cream">
+                      {row.day}
+                    </td>
+                    <td className="px-6 py-5 text-cream/65">{row.location}</td>
+                    <td className="whitespace-nowrap px-6 py-5 text-orange">
+                      {row.hours}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {weeklySchedule.map((row, i) => (
-                    <tr
-                      key={row.day}
-                      data-schedule-row
-                      className={`opacity-0 ${i % 2 === 0 ? "bg-cream" : "bg-white"}`}
-                    >
-                      <td className="px-6 py-4 font-semibold text-charcoal">
-                        {row.day}
-                      </td>
-                      <td className="px-6 py-4 text-charcoal/80">
-                        <span>{row.location}</span>
-                        {row.note && (
-                          <span className="mt-1 block text-xs text-charcoal/50">
-                            {row.note}
-                          </span>
-                        )}
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 font-medium text-orange">
-                        {row.hours}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <section className="section-padding !pt-0">
+      <section className="section-dark section-spacious border-t border-cream/10">
         <div className="container-narrow">
           <AnimateInView preset="fadeUp">
-            <h2 className="font-display text-2xl font-bold text-charcoal">Map</h2>
-            <p className="mt-2 text-sm text-charcoal/60">
-              {/* REPLACE WITH REAL MAP: Google Maps embed centered on Palm Beach County, FL */}
-              Replace with your Google Maps embed iframe when ready.
+            <h2 className="font-display text-2xl font-semibold text-cream">
+              Service Area
+            </h2>
+            <p className="text-lead mt-4 max-w-lg">
+              {/* REPLACE WITH REAL MAP: Google Maps embed — Palm Beach County, FL */}
+              The truck serves Palm Beach County — West Palm Beach, Delray, Lake Worth, Jupiter, and beyond. Check Instagram for the live pin; we don&apos;t publish one fixed curb address.
             </p>
-            <div className="mt-6 flex aspect-[16/9] items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-charcoal/20 bg-charcoal/5">
-              <div className="px-6 text-center">
-                <p className="font-display text-xl text-charcoal/70">
-                  Palm Beach County, Florida
-                </p>
-                <p className="mt-2 max-w-md text-sm text-charcoal/50">
-                  Embed: Google Maps centered on Palm Beach County
-                </p>
-              </div>
+            <div className="mt-10 flex aspect-[16/9] items-center justify-center rounded-2xl border border-cream/10 bg-rich-black shadow-soft">
+              <p className="text-sm text-cream/40">
+                County map embed — follow social for today&apos;s stop
+              </p>
             </div>
           </AnimateInView>
         </div>
       </section>
 
-      <section className="section-padding bg-charcoal text-cream">
-        <div className="container-narrow grid gap-12 md:grid-cols-2">
+      <section className="section-dark section-spacious border-t border-cream/10">
+        <div className="container-narrow grid gap-14 md:grid-cols-2">
           <AnimateInView preset="slideLeft">
-            <h2 className="font-display text-2xl font-bold">Hours of Operation</h2>
-            <p className="mt-4 leading-relaxed text-cream/85">
-              <strong className="text-gold">Regular service:</strong>{" "}
-              {hoursOfOperation.general}
-            </p>
-            <p className="mt-4 leading-relaxed text-cream/85">
-              <strong className="text-gold">Catering:</strong>{" "}
-              {hoursOfOperation.catering}
-            </p>
-            {/* UPDATE HOURS: Replace placeholder schedule above when final hours are set */}
+            <h2 className="font-display text-2xl font-semibold text-cream">Hours</h2>
+            <p className="text-lead mt-6">{hoursOfOperation.general}</p>
+            <p className="text-lead mt-4">{hoursOfOperation.catering}</p>
           </AnimateInView>
           <AnimateInView preset="slideRight">
-            <div className="rounded-2xl border border-gold/30 bg-cream/5 p-8">
-              <h2 className="font-display text-2xl font-bold text-gold">
-                Book Flavor Kitchen for Your Event
+            <div className="rounded-2xl border border-cream/10 p-8 shadow-soft">
+              <h2 className="font-display text-2xl font-semibold text-gold">
+                Book the Truck
               </h2>
-              <p className="mt-4 leading-relaxed text-cream/85">
-                Weddings, corporate lunches, festivals, and backyard celebrations
-                across Palm Beach County — we bring the full five-culture menu
-                and a professional crew.
+              <p className="text-lead mt-6">
+                Weddings, corporate events, and festivals across Palm Beach County.
               </p>
-              <Link href="/contact" className="btn-primary mt-6">
-                Request a Quote
+              <Link href="/contact" className="btn-primary mt-8 inline-flex">
+                Get in Touch
               </Link>
             </div>
           </AnimateInView>

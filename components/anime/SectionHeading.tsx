@@ -3,33 +3,26 @@
 import AnimateInView from "./AnimateInView";
 
 interface SectionHeadingProps {
-  eyebrow?: string;
   title: string;
   description?: string;
   light?: boolean;
   className?: string;
+  align?: "center" | "left";
 }
 
 export default function SectionHeading({
-  eyebrow,
   title,
   description,
-  light = false,
+  light = true,
   className = "",
+  align = "center",
 }: SectionHeadingProps) {
+  const alignClass = align === "center" ? "text-center" : "text-left";
+
   return (
-    <AnimateInView preset="fadeUp" className={`text-center ${className}`}>
-      {eyebrow && (
-        <p
-          className={`text-sm font-semibold uppercase tracking-widest ${
-            light ? "text-gold" : "text-orange"
-          }`}
-        >
-          {eyebrow}
-        </p>
-      )}
+    <AnimateInView preset="fadeUp" className={`${alignClass} ${className}`}>
       <h2
-        className={`mt-2 font-display text-3xl font-bold sm:text-4xl ${
+        className={`font-display text-3xl font-semibold sm:text-4xl ${
           light ? "text-cream" : "text-charcoal"
         }`}
       >
@@ -37,9 +30,9 @@ export default function SectionHeading({
       </h2>
       {description && (
         <p
-          className={`mx-auto mt-4 max-w-2xl ${
-            light ? "text-cream/80" : "text-charcoal/75"
-          }`}
+          className={`mt-4 max-w-xl text-base leading-relaxed ${
+            align === "center" ? "mx-auto" : ""
+          } ${light ? "text-cream/65" : "text-charcoal/65"}`}
         >
           {description}
         </p>

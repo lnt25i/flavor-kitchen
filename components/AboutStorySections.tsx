@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback } from "react";
 import { chefStory, cuisines, site } from "@/lib/data";
@@ -9,133 +8,117 @@ import { bounceIn, staggerFadeUp } from "@/lib/anime/presets";
 import { useAnimeInView } from "@/hooks/useAnimeInView";
 import AnimateInView from "./anime/AnimateInView";
 import SectionHeading from "./anime/SectionHeading";
+import ClickableImage from "./lightbox/ClickableImage";
+
+const chefSlides = [
+  { src: images.chef.portrait.src, title: "Chef Raben", description: images.chef.portrait.alt },
+];
+const truckSlides = [
+  { src: images.chef.truck.src, title: "Flavor Kitchen Truck", description: images.chef.truck.alt },
+];
 
 export default function AboutStorySections() {
   const storyRef = useAnimeInView(
     useCallback((el: HTMLElement) => {
-      const paragraphs = el.querySelectorAll("[data-story-p]");
-      staggerFadeUp(Array.from(paragraphs) as Element[], 120);
+      staggerFadeUp(
+        Array.from(el.querySelectorAll("[data-story-p]")) as Element[],
+        140
+      );
     }, [])
   );
 
-  const cuisineRef = useAnimeInView(
+  const flagsRef = useAnimeInView(
     useCallback((el: HTMLElement) => {
-      const icons = el.querySelectorAll("[data-cuisine-flag]");
-      bounceIn(Array.from(icons) as Element[], 80);
+      bounceIn(Array.from(el.querySelectorAll("[data-flag]")) as Element[], 90);
     }, [])
   );
 
   return (
     <>
-      <section className="section-padding">
-        <div className="container-narrow">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <AnimateInView preset="scaleIn">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl">
-                <Image
-                  src={images.chef.portrait.src}
-                  alt={images.chef.portrait.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-              </div>
-            </AnimateInView>
-            <div ref={storyRef as React.RefObject<HTMLDivElement>} className="opacity-0">
-              <h2 className="font-display text-3xl font-bold text-charcoal">
-                Chef Raben
-              </h2>
-              <p data-story-p className="mt-6 leading-relaxed text-charcoal/80 opacity-0">
-                {chefStory.intro}
-              </p>
-              <p data-story-p className="mt-4 leading-relaxed text-charcoal/80 opacity-0">
-                {chefStory.fusion}
-              </p>
-              <p data-story-p className="mt-4 leading-relaxed text-charcoal/80 opacity-0">
-                {chefStory.signatures}
-              </p>
-            </div>
+      <section className="section-dark section-spacious">
+        <div className="container-narrow grid items-center gap-14 lg:grid-cols-2">
+          <ClickableImage
+            src={images.chef.portrait.src}
+            alt={images.chef.portrait.alt}
+            title="Flavor Kitchen Truck"
+            slides={chefSlides}
+            width={800}
+            height={500}
+            className="h-auto w-full object-contain"
+            wrapperClassName="w-full rounded-2xl shadow-soft"
+          />
+          <div ref={storyRef as React.RefObject<HTMLDivElement>} className="opacity-0">
+            <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
+              Chef Raben
+            </h2>
+            <p data-story-p className="text-lead mt-8 opacity-0">
+              {chefStory.foodTruck}
+            </p>
+            <p data-story-p className="text-lead mt-6 opacity-0">
+              {chefStory.intro}
+            </p>
+            <p data-story-p className="text-lead mt-6 opacity-0">
+              {chefStory.fusion}
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-charcoal text-cream">
+      <section className="section-dark section-spacious border-t border-cream/10">
         <div className="container-narrow">
           <SectionHeading
-            eyebrow="Born in Haiti"
-            title="From Port-au-Prince to the Truck"
-            description="Haitian heritage is the soul of Flavor Kitchen — griot spices, pikliz tang, and the warmth of cooking for community."
-            light
+            title="Born in Haiti"
+            description="Island roots, passed-down recipes, and the fire of Port-au-Prince in every plate."
           />
-          <AnimateInView preset="fadeUp" className="mt-8">
-            <p className="leading-relaxed text-cream/85">
-              Growing up in Haiti, Raben learned that food is love, resistance,
-              and celebration. Those early flavors — citrus-marinated pork,
-              fiery pickles, and shared meals with family — still anchor every
-              recipe he serves today.
-            </p>
-          </AnimateInView>
-          <div className="relative mt-10 aspect-[21/9] overflow-hidden rounded-2xl">
-            <Image
+          <AnimateInView preset="fadeUp" className="mt-10">
+            <ClickableImage
               src={images.chef.truck.src}
               alt={images.chef.truck.alt}
-              fill
-              className="object-cover"
-              sizes="100vw"
+              title="Flavor Kitchen — Menu Side"
+              slides={truckSlides}
+              width={1200}
+              height={600}
+              className="h-auto w-full object-contain"
+              wrapperClassName="w-full rounded-2xl shadow-soft"
             />
-          </div>
+          </AnimateInView>
         </div>
       </section>
 
-      <section className="section-padding">
-        <div className="container-narrow">
-          <SectionHeading
-            eyebrow="Five Cuisines"
-            title="One Vision"
-            description="Haitian soul, American heart, Greek freshness, French technique, and Caribbean fire — united on one menu."
-          />
-          <div
-            ref={cuisineRef as React.RefObject<HTMLDivElement>}
-            className="mt-10 grid gap-6 opacity-0 sm:grid-cols-2 lg:grid-cols-5"
+      <section className="section-dark section-spacious border-t border-cream/10">
+        <div className="container-narrow text-center">
+          <SectionHeading title="Five Cuisines, One Vision" />
+          <ul
+            ref={flagsRef as React.RefObject<HTMLUListElement>}
+            className="mt-12 flex flex-wrap justify-center gap-4 opacity-0"
           >
             {cuisines.map((c) => (
-              <div
+              <li
                 key={c.id}
-                className="rounded-2xl border border-charcoal/10 bg-white p-6 text-center shadow-sm"
+                data-flag
+                className="rounded-full border border-cream/15 px-5 py-3 text-cream/80 opacity-0"
               >
-                <span
-                  data-cuisine-flag
-                  className="text-4xl opacity-0"
-                  aria-hidden
-                >
-                  {c.emoji}
-                </span>
-                <h3 className="mt-3 font-display text-lg font-semibold text-orange">
-                  {c.name}
-                </h3>
-                <p className="mt-2 text-sm text-charcoal/70">{c.tagline}</p>
-              </div>
+                <span className="mr-2">{c.emoji}</span>
+                {c.name}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      <section className="section-padding bg-cream">
-        <div className="container-narrow">
+      <section className="section-light section-spacious">
+        <div className="container-narrow text-center">
           <SectionHeading
-            eyebrow="Palm Beach County"
-            title="Why We Serve Here"
+            title={site.location}
             description={chefStory.palmBeach}
+            light={false}
           />
-          <AnimateInView preset="fadeUp" className="mt-8 text-center">
-            <p className="font-display text-2xl italic text-charcoal">
-              &ldquo;{site.mission}&rdquo;
-            </p>
-            <Link href="/contact" className="btn-primary mt-10 inline-flex">
-              Book Us for Your Event
-            </Link>
-          </AnimateInView>
+          <p className="font-display mt-10 text-2xl italic text-charcoal">
+            &ldquo;{site.mission}&rdquo;
+          </p>
+          <Link href="/contact" className="btn-ghost-light mt-10 inline-flex">
+            Book an Event
+          </Link>
         </div>
       </section>
     </>

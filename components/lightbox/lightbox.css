@@ -1,0 +1,41 @@
+.yarl__container {
+  background-color: #0d0d0d !important;
+}
+
+.yarl__slide_title {
+  font-family: var(--font-playfair), Georgia, serif;
+  color: #fff8f0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.yarl__slide_description {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: rgba(255, 248, 240, 0.65);
+  font-size: 0.875rem;
+  max-width: 36rem;
+  margin: 0.25rem auto 0;
+}
+
+.yarl__button {
+  filter: none;
+}
+
+.yarl__navigation_prev,
+.yarl__navigation_next {
+  color: #ff6b35 !important;
+}
+
+.yarl__navigation_prev:hover,
+.yarl__navigation_next:hover {
+  color: #ffb347 !important;
+}
+
+.yarl__button_close {
+  color: rgba(255, 248, 240, 0.8) !important;
+}
+
+.yarl__button_close:hover {
+  color: #ff6b35 !important;
+}

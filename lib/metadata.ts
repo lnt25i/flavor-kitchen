@@ -3,7 +3,7 @@ import { site } from "./data";
 import { ogImage, siteUrl } from "./images";
 
 const defaultDescription =
-  "Chef Raben's food truck in Palm Beach County, Florida. Haitian roots meet American, Greek, French, and Caribbean flavors — tacos, burgers, and chef specials.";
+  "Flavor Kitchen by Chef Raben — West Palm Beach, FL. Bold Flavor. Made Fresh. The real truck menu: gyros, wraps, burgers, tacos, and more.";
 
 export function createMetadata({
   title,
@@ -59,18 +59,18 @@ export const menuMetadata = createMetadata({
 export const aboutMetadata = createMetadata({
   title: "About",
   description:
-    "Born in Haiti, trained by the world. Meet Chef Raben and discover the five-cuisine vision behind Flavor Kitchen.",
+    "Meet Chef Raben and the Flavor Kitchen food truck — mobile street food with five-culture fusion across Palm Beach County.",
   path: "/about",
 });
 export const findUsMetadata = createMetadata({
   title: "Find Us",
   description:
-    "Weekly schedule and locations across Palm Beach County, Florida. Book Flavor Kitchen for your next event.",
+    "Mobile food truck schedule — rotating Palm Beach County stops. Follow @RaBenFlavorKitchen for today’s location. Book the truck for events.",
   path: "/find-us",
 });
 export const contactMetadata = createMetadata({
   title: "Contact",
   description:
-    "Contact Flavor Kitchen for catering, events, and press. info@flavorkitchen.us · @Rabenflavorkitchen",
+    "Contact Flavor Kitchen for catering, events, and press. info@flavorkitchen.us · @RaBenFlavorKitchen",
   path: "/contact",
 });
