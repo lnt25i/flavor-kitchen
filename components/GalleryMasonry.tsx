@@ -59,14 +59,12 @@ export default function GalleryMasonry() {
                     wrapperClassName="absolute inset-0 h-full w-full"
                   />
                 </div>
-                <figcaption className="border-t border-cream/10 bg-charcoal/80 px-4 py-3 backdrop-blur-sm">
-                  <p className="font-display text-base text-cream">
+                <figcaption className="border-t border-cream/15 bg-charcoal/90 px-4 py-3.5 backdrop-blur-sm sm:px-5 sm:py-4">
+                  <p className="text-card-title text-lg sm:text-xl">
                     {photo.item.name}
                   </p>
                   {badge ? (
-                    <p className="mt-0.5 text-xs uppercase tracking-widest text-gold/80">
-                      {badge}
-                    </p>
+                    <p className="text-eyebrow mt-1 !text-xs">{badge}</p>
                   ) : null}
                 </figcaption>
               </figure>

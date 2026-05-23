@@ -125,12 +125,13 @@ export function pulseLoop(target: Element): JSAnimation {
   });
 }
 
+/** Letter cascade — subtle translate only; letters stay visible. */
 export function letterStagger(targets: Element[]): JSAnimation {
   return animate(targets, {
-    opacity: [0, 1],
-    translateY: [20, 0],
+    opacity: [0.85, 1],
+    translateY: [12, 0],
     duration: 500,
-    delay: stagger(35),
+    delay: stagger(30),
     ease: "outCubic",
   });
 }

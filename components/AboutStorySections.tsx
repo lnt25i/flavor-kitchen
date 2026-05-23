@@ -67,7 +67,7 @@ export default function AboutStorySections() {
             wrapperClassName="w-full rounded-2xl shadow-soft"
           />
           <div ref={storyRef as React.RefObject<HTMLDivElement>}>
-            <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
+            <h2 className="text-display-section text-3xl sm:text-4xl">
               Chef Raben
             </h2>
             <p data-story-p className="text-lead mt-8">
@@ -148,7 +148,7 @@ export default function AboutStorySections() {
             description={chefStory.palmBeach}
             light={false}
           />
-          <p className="font-display mt-10 text-2xl italic text-charcoal">
+          <p className="text-tagline mt-10 text-charcoal">
             &ldquo;{site.tagline}&rdquo;
           </p>
           <Link href="/contact" className="btn-ghost-light mt-10 inline-flex">

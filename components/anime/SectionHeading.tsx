@@ -21,22 +21,18 @@ export default function SectionHeading({
 
   return (
     <ScrollReveal className={`${alignClass} ${className}`}>
-      <h2
-        className={`font-display text-3xl font-semibold sm:text-4xl ${
-          light ? "text-cream" : "text-charcoal"
-        }`}
-      >
+      <h2 className={light ? "text-display-section" : "text-display-section-dark"}>
         {title}
       </h2>
-      {description && (
+      {description ? (
         <p
-          className={`mt-4 max-w-xl text-base leading-relaxed ${
+          className={`mt-5 max-w-2xl ${
             align === "center" ? "mx-auto" : ""
-          } ${light ? "text-cream/65" : "text-charcoal/65"}`}
+          } ${light ? "text-lead" : "text-lead-dark"}`}
         >
           {description}
         </p>
-      )}
+      ) : null}
     </ScrollReveal>
   );
 }

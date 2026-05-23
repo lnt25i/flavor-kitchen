@@ -32,7 +32,7 @@ export default function ContactPage() {
               </a>
 
               <p className="text-eyebrow mt-10">Social</p>
-              <ul className="mt-4 space-y-3 text-sm text-cream/70">
+              <ul className="mt-4 space-y-3 text-body">
                 <li>
                   <a
                     href={contact.social.instagram}
@@ -64,7 +64,7 @@ export default function ContactPage() {
                   </a>
                 </li>
               </ul>
-              <p className="text-lead mt-8 text-sm">{contact.responseTime}</p>
+              <p className="text-body-muted mt-8">{contact.responseTime}</p>
             </div>
           </AnimateInView>
         </div>

@@ -12,18 +12,16 @@ export default function PageHeaderReveal({
   description,
 }: PageHeaderRevealProps) {
   return (
-    <section className="section-dark section-premium-edge border-b border-cream/10 pt-32 pb-16 text-center">
-      <div className="container-narrow px-4">
+    <section className="section-dark section-premium-edge border-b border-cream/10 pt-28 pb-14 sm:pt-32 sm:pb-16">
+      <div className="container-narrow px-4 text-center">
         <ScrollReveal>
-          <h1 className="font-display text-4xl font-semibold text-cream sm:text-5xl">
-            {title}
-          </h1>
+          <div className="page-header-panel mx-auto max-w-3xl">
+            <h1 className="text-display-page">{title}</h1>
+            {description ? (
+              <p className="text-lead mx-auto mt-5 max-w-xl">{description}</p>
+            ) : null}
+          </div>
         </ScrollReveal>
-        {description ? (
-          <ScrollReveal delay={120}>
-            <p className="text-lead mx-auto mt-6 max-w-md">{description}</p>
-          </ScrollReveal>
-        ) : null}
       </div>
     </section>
   );

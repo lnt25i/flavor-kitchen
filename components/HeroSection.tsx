@@ -1,9 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import { fadeUp } from "@/lib/anime/presets";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { site } from "@/lib/data";
 import { images } from "@/lib/images";
 import ClickableImage from "./lightbox/ClickableImage";
@@ -43,57 +40,11 @@ function PinIcon() {
 }
 
 export default function HeroSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const leftWrapRef = useRef<HTMLDivElement>(null);
-  const rightWrapRef = useRef<HTMLDivElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLSpanElement>(null);
-  const reducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    if (taglineRef.current) fadeUp(taglineRef.current, reducedMotion ? 0 : 400);
-    if (badgeRef.current) fadeUp(badgeRef.current, reducedMotion ? 0 : 550);
-    if (ctaRef.current) fadeUp(ctaRef.current, reducedMotion ? 0 : 700);
-  }, [reducedMotion]);
-
-  useEffect(() => {
-    if (reducedMotion) return;
-
-    const section = sectionRef.current;
-    const left = leftWrapRef.current;
-    const right = rightWrapRef.current;
-    if (!section || !left || !right) return;
-
-    let ticking = false;
-
-    const update = () => {
-      const rect = section.getBoundingClientRect();
-      const progress = Math.max(0, -rect.top);
-      const mobile = window.matchMedia("(max-width: 767px)").matches;
-      const scale = mobile ? 0.5 : 1;
-
-      left.style.transform = `translate3d(0, ${progress * 0.06 * scale}px, 0)`;
-      right.style.transform = `translate3d(0, ${progress * 0.1 * scale}px, 0)`;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [reducedMotion]);
-
   return (
-    <section ref={sectionRef} className="section-premium-edge pt-24 md:pt-28">
+    <section className="section-premium-edge pt-24 md:pt-28">
       <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div ref={leftWrapRef} className="w-full will-change-transform">
+          <div className="w-full">
             <ClickableImage
               src={images.hero.left.src}
               alt={images.hero.left.alt}
@@ -107,7 +58,7 @@ export default function HeroSection() {
               wrapperClassName="w-full"
             />
           </div>
-          <div ref={rightWrapRef} className="w-full will-change-transform">
+          <div className="w-full">
             <ClickableImage
               src={images.hero.right.src}
               alt={images.hero.right.alt}
@@ -124,28 +75,23 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="container-narrow section-spacious !pt-16 text-center">
-        <LetterHeadline
-          text="Flavor Kitchen by Chef Raben"
-          className="font-display text-3xl font-semibold text-cream sm:text-4xl md:text-5xl"
-        />
-        <p
-          ref={taglineRef}
-          className="mt-6 font-display text-xl italic text-gold sm:text-2xl"
-        >
-          {site.tagline}
-        </p>
-        <div
-          ref={badgeRef}
-          className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-cream/20 bg-charcoal/50 px-5 py-2.5 text-sm text-cream/80 backdrop-blur-sm"
-        >
-          <PinIcon />
-          <span>{site.location}</span>
-        </div>
-        <div className="mt-12">
-          <Link href="/menu" className="btn-primary">
-            <span ref={ctaRef}>Explore Our Menu</span>
-          </Link>
+      <div className="container-narrow section-spacious !pt-12 sm:!pt-16">
+        <div className="hero-copy-panel text-center">
+          <p className="text-eyebrow">Palm Beach County Food Truck</p>
+          <LetterHeadline
+            text="Flavor Kitchen by Chef Raben"
+            className="text-display-hero mt-4"
+          />
+          <p className="text-tagline mt-5">{site.tagline}</p>
+          <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-cream/25 bg-rich-black/50 px-5 py-2.5 text-type-body-sm text-cream backdrop-blur-sm">
+            <PinIcon />
+            <span>{site.location}</span>
+          </div>
+          <div className="mt-10">
+            <Link href="/menu" className="btn-primary">
+              Explore Our Menu
+            </Link>
+          </div>
         </div>
       </div>
     </section>

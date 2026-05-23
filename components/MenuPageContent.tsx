@@ -15,14 +15,14 @@ export default function MenuPageContent() {
   return (
     <section className="section-dark section-spacious section-premium-edge">
       <div className="container-narrow">
-        <p className="text-center text-sm text-cream/50">
+        <p className="text-body-muted text-center">
           All twenty owner menu photos — two styles per item. Tap to enlarge.
         </p>
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {allPhotos.map((photo) => (
             <article
               key={photo.src}
-              className="overflow-hidden rounded-2xl border border-cream/10 shadow-soft"
+              className="overflow-hidden rounded-2xl border border-cream/15 bg-charcoal/90 shadow-panel backdrop-blur-md"
             >
               <div
                 className={`relative aspect-[4/3] w-full overflow-hidden ${
@@ -43,17 +43,13 @@ export default function MenuPageContent() {
                   wrapperClassName="absolute inset-0 h-full w-full"
                 />
               </div>
-              <div className="border-t border-cream/10 px-6 py-5">
+              <div className="border-t border-cream/15 px-6 py-5 sm:py-6">
                 <p className="text-eyebrow">
                   #{photo.item.number} · {photo.variant}
                 </p>
-                <h3 className="mt-1 font-display text-xl text-cream">
-                  {photo.item.name}
-                </h3>
+                <h3 className="text-card-title mt-2">{photo.item.name}</h3>
                 {photo.item.description ? (
-                  <p className="text-lead mt-2 !text-sm">
-                    {photo.item.description}
-                  </p>
+                  <p className="text-body-muted mt-2">{photo.item.description}</p>
                 ) : null}
                 {hasMenuPrice(photo.item) ? (
                   <p className="mt-3 font-semibold text-orange">

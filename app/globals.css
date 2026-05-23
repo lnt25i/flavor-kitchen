@@ -3,15 +3,25 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
-    @apply bg-rich-black font-sans text-cream antialiased;
+    @apply bg-rich-black font-sans text-type-body-base text-cream antialiased;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display;
+    @apply font-display font-semibold tracking-tight text-cream;
+  }
+
+  p {
+    @apply leading-relaxed;
   }
 }
 
@@ -21,7 +31,7 @@
   }
 
   .section-dark {
-    @apply bg-charcoal/80 text-cream backdrop-blur-md;
+    @apply bg-charcoal/90 text-cream backdrop-blur-md;
   }
 
   .section-light {
@@ -33,41 +43,118 @@
   }
 
   .divider-thin {
-    @apply border-t border-cream/10;
+    @apply border-t border-cream/15;
   }
 
   .card-premium {
-    @apply rounded-2xl border border-cream/10 bg-charcoal/70 shadow-soft backdrop-blur-sm;
+    @apply rounded-2xl border border-cream/15 bg-charcoal/85 shadow-panel backdrop-blur-md;
   }
 
-  .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-orange px-8 py-3 text-sm font-medium uppercase tracking-widest text-cream shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black;
+  /* ——— Typography scale ——— */
+
+  .text-display-hero {
+    @apply font-display text-type-hero font-semibold text-cream;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
   }
 
-  .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-cream/25 bg-transparent px-8 py-3 text-sm font-medium uppercase tracking-widest text-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-cream/40 focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black;
+  .text-display-page {
+    @apply font-display text-type-page font-semibold text-cream;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
   }
 
-  .btn-ghost-light {
-    @apply inline-flex items-center justify-center rounded-full border border-charcoal/15 bg-transparent px-8 py-3 text-sm font-medium uppercase tracking-widest text-charcoal focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal/30;
+  .text-display-section {
+    @apply font-display text-type-section font-semibold text-cream;
+  }
+
+  .text-display-section-dark {
+    @apply font-display text-type-section font-semibold text-charcoal;
   }
 
   .text-eyebrow {
-    @apply text-xs font-medium uppercase tracking-[0.25em] text-gold;
+    @apply text-xs font-semibold uppercase tracking-brand text-gold sm:text-sm;
+  }
+
+  .text-eyebrow-dark {
+    @apply text-xs font-semibold uppercase tracking-brand text-orange sm:text-sm;
   }
 
   .text-lead {
-    @apply text-base leading-relaxed text-cream/70 sm:text-lg;
+    @apply text-type-body-lg leading-relaxed text-cream/90;
   }
 
   .text-lead-dark {
-    @apply text-base leading-relaxed text-charcoal/70 sm:text-lg;
+    @apply text-type-body-lg leading-relaxed text-charcoal/80;
+  }
+
+  .text-body {
+    @apply text-type-body-base leading-relaxed text-cream/90;
+  }
+
+  .text-body-muted {
+    @apply text-type-body-sm leading-relaxed text-cream/80;
+  }
+
+  .text-body-dark {
+    @apply text-type-body-base leading-relaxed text-charcoal/80;
+  }
+
+  .text-caption {
+    @apply text-sm leading-relaxed text-cream/70;
+  }
+
+  .text-nav {
+    @apply text-xs font-semibold uppercase tracking-nav sm:text-sm;
+  }
+
+  .text-card-title {
+    @apply font-display text-xl font-semibold leading-snug text-cream sm:text-2xl;
+  }
+
+  .text-tagline {
+    @apply font-display text-xl italic leading-snug text-gold sm:text-2xl;
+    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Readable surfaces over photos / truck background */
+
+  .text-panel {
+    @apply rounded-2xl border border-cream/15 bg-charcoal/90 px-6 py-8 shadow-panel backdrop-blur-md sm:px-10 sm:py-10;
+  }
+
+  .hero-copy-panel {
+    @apply mx-auto max-w-3xl rounded-2xl border border-cream/15 bg-charcoal/90 px-6 py-10 shadow-panel backdrop-blur-md sm:px-10 sm:py-12;
+  }
+
+  .page-header-panel {
+    @apply rounded-2xl border border-cream/15 bg-charcoal/90 px-6 py-8 shadow-panel backdrop-blur-md sm:px-10;
+  }
+
+  /* ——— Buttons ——— */
+
+  .btn-primary {
+    @apply inline-flex min-h-[48px] items-center justify-center rounded-full bg-orange px-8 py-3.5 text-sm font-semibold uppercase tracking-nav text-cream shadow-soft transition-colors hover:bg-orange/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black sm:min-h-[52px] sm:text-base;
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-[48px] items-center justify-center rounded-full border border-cream/30 bg-charcoal/50 px-8 py-3.5 text-sm font-semibold uppercase tracking-nav text-cream backdrop-blur-sm transition-colors hover:border-cream/50 hover:bg-charcoal/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-cream/40 focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black sm:min-h-[52px] sm:text-base;
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex min-h-[48px] items-center justify-center rounded-full border border-charcoal/20 bg-white/60 px-8 py-3.5 text-sm font-semibold uppercase tracking-nav text-charcoal backdrop-blur-sm transition-colors hover:border-charcoal/30 hover:bg-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-charcoal/30 sm:min-h-[52px] sm:text-base;
   }
 }
 
 @layer utilities {
   .shadow-soft {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
+  }
+
+  .shadow-panel {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .text-balance {
+    text-wrap: balance;
   }
 
   .scroll-reveal {

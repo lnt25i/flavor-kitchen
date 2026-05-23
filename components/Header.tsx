@@ -131,14 +131,14 @@ export default function Header() {
     <header
       ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 border-b border-transparent ${
-        scrolled || menuOpen ? "shadow-soft backdrop-blur-md" : ""
+        scrolled || menuOpen ? "border-cream/15 bg-rich-black/95 shadow-soft backdrop-blur-md" : "bg-rich-black/40 backdrop-blur-sm"
       }`}
-      style={{ backgroundColor: "rgba(13, 13, 13, 0)" }}
+      style={scrolled || menuOpen ? undefined : { backgroundColor: "rgba(13, 13, 13, 0.55)" }}
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5 sm:px-6">
         <Link
           href="/"
-          className="font-display text-lg font-semibold tracking-wide text-cream"
+          className="font-display text-lg font-semibold tracking-wide text-cream sm:text-xl"
         >
           Flavor Kitchen
         </Link>
@@ -155,8 +155,8 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 data-nav-link
-                className="text-xs font-medium uppercase tracking-widest opacity-0"
-                style={{ color: active ? "#FF6B35" : "rgba(255, 248, 240, 0.7)" }}
+                className="text-nav"
+                style={{ color: active ? "#FF6B35" : "rgba(255, 248, 240, 0.88)" }}
                 onMouseEnter={(e) => {
                   if (active) hoverLinkColorActive(e.currentTarget, true);
                   else hoverLinkColor(e.currentTarget, true);
@@ -202,7 +202,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               data-mobile-link
-              className={`font-display text-xl opacity-0 ${
+              className={`font-display text-2xl font-semibold sm:text-3xl ${
                 pathname === link.href ? "text-orange" : "text-cream"
               }`}
             >

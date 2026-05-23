@@ -37,20 +37,20 @@ export default function ContactForm() {
     return (
       <div
         ref={successRef}
-        className="rounded-2xl border border-cream/10 p-10 text-center opacity-0 shadow-soft"
+        className="card-premium p-10 text-center"
       >
-        <p className="font-display text-2xl text-cream">Thank you</p>
+        <p className="text-display-section text-2xl">Thank you</p>
         <p className="text-lead mt-4">We&apos;ll reply soon at info@flavorkitchen.us.</p>
       </div>
     );
   }
 
   const fieldClass =
-    "w-full rounded-full border border-cream/15 bg-rich-black px-5 py-3.5 text-cream placeholder:text-cream/30 focus:border-orange focus:outline-none focus:ring-1 focus:ring-orange";
+    "w-full rounded-full border border-cream/25 bg-rich-black/90 px-5 py-3.5 text-base text-cream placeholder:text-cream/50 focus:border-orange focus:outline-none focus:ring-1 focus:ring-orange";
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-      <div data-field className="opacity-0">
+      <div data-field>
         <input
           id="name"
           name="name"
@@ -60,7 +60,7 @@ export default function ContactForm() {
           className={fieldClass}
         />
       </div>
-      <div data-field className="opacity-0">
+      <div data-field>
         <input
           id="email"
           name="email"
@@ -70,7 +70,7 @@ export default function ContactForm() {
           className={fieldClass}
         />
       </div>
-      <div data-field className="opacity-0">
+      <div data-field>
         <input
           id="phone"
           name="phone"
@@ -79,7 +79,7 @@ export default function ContactForm() {
           className={fieldClass}
         />
       </div>
-      <div data-field className="opacity-0">
+      <div data-field>
         <select
           id="subject"
           name="subject"
@@ -94,7 +94,7 @@ export default function ContactForm() {
           ))}
         </select>
       </div>
-      <div data-field className="opacity-0">
+      <div data-field>
         <textarea
           id="message"
           name="message"
@@ -104,7 +104,7 @@ export default function ContactForm() {
           className={`${fieldClass} !rounded-3xl`}
         />
       </div>
-      <button type="submit" data-field className="btn-primary w-full opacity-0 sm:w-auto">
+      <button type="submit" data-field className="btn-primary w-full sm:w-auto">
         Send
       </button>
     </form>

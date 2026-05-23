@@ -27,9 +27,7 @@ export default function HomePage() {
       <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow grid items-center gap-14 lg:grid-cols-2">
           <AnimateInView preset="fadeUp">
-            <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
-              Chef Raben · Flavor Kitchen
-            </h2>
+            <h2 className="text-display-section">Chef Raben · Flavor Kitchen</h2>
             <p className="text-lead mt-6 max-w-md">{chefStory.foodTruck}</p>
             <p className="text-lead mt-4 max-w-md">{chefStory.truckMenu}</p>
             <Link href="/about" className="btn-secondary mt-10 inline-flex">
@@ -54,7 +52,7 @@ export default function HomePage() {
       <section className="section-light section-spacious section-premium-edge">
         <div className="container-narrow text-center">
           <ScrollReveal>
-            <p className="font-display text-2xl italic leading-relaxed text-charcoal sm:text-3xl">
+            <p className="font-display text-2xl italic leading-snug text-charcoal sm:text-3xl">
               &ldquo;{site.tagline}&rdquo;
             </p>
             <p className="text-lead-dark mt-6">
