@@ -3,9 +3,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { animate } from "animejs";
 import { truckMenu } from "@/lib/data";
+import { hasMenuPrice, menuItemCaption } from "@/lib/menu";
 import { scaleIn } from "@/lib/anime/presets";
 import ClickableImage from "./lightbox/ClickableImage";
 import type { LightboxSlide } from "@/lib/lightbox";
+
 function handleCardHover(el: HTMLElement, entering: boolean) {
   animate(el, {
     scale: entering ? 1.02 : 1,
@@ -20,7 +22,7 @@ function handleCardHover(el: HTMLElement, entering: boolean) {
 const menuSlides: LightboxSlide[] = truckMenu.map((item) => ({
   src: item.image,
   title: `#${item.number} ${item.name}`,
-  description: item.description,
+  description: menuItemCaption(item),
 }));
 
 export default function MenuPageContent() {
@@ -56,7 +58,7 @@ export default function MenuPageContent() {
     <section className="section-dark section-spacious">
       <div className="container-narrow">
         <p className="text-center text-sm text-cream/50">
-          The menu on our truck — ten items, made fresh.
+          Ten items from the truck wrap — tap any photo to enlarge.
         </p>
         <div
           ref={gridRef}
@@ -66,7 +68,7 @@ export default function MenuPageContent() {
             <article
               key={item.number}
               data-menu-card
-              className="overflow-hidden rounded-2xl border border-cream/10 shadow-soft"
+              className="overflow-hidden rounded-2xl border border-cream/10 bg-cream shadow-soft"
               onMouseEnter={(e) =>
                 handleCardHover(e.currentTarget as HTMLElement, true)
               }
@@ -79,22 +81,26 @@ export default function MenuPageContent() {
                   src={item.image}
                   alt={item.name}
                   title={`#${item.number} ${item.name}`}
-                  caption={item.description}
+                  caption={menuItemCaption(item)}
                   slides={menuSlides}
                   slideIndex={i}
                   width={600}
                   height={600}
                   className="h-auto w-full object-contain"
-                  wrapperClassName="w-full bg-rich-black"
+                  wrapperClassName="w-full"
                 />
               </div>
-              <div className="border-t border-cream/10 px-6 py-5">
+              <div className="border-t border-cream/10 bg-rich-black px-6 py-5">
                 <p className="text-eyebrow">#{item.number}</p>
                 <h3 className="mt-1 font-display text-xl text-cream">
                   {item.name}
                 </h3>
-                <p className="text-lead mt-2 !text-sm">{item.description}</p>
-                <p className="mt-3 font-semibold text-orange">{item.price}</p>
+                {item.description ? (
+                  <p className="text-lead mt-2 !text-sm">{item.description}</p>
+                ) : null}
+                {hasMenuPrice(item) ? (
+                  <p className="mt-3 font-semibold text-orange">{item.price}</p>
+                ) : null}
               </div>
             </article>
           ))}

@@ -26,7 +26,7 @@ export default function GalleryMasonry() {
       <div className="container-narrow">
         <SectionHeading
           title="Gallery"
-          description="Tap any dish to view full size."
+          description="Owner menu photos — tap any item to view full size."
           light
         />
         <div
@@ -47,8 +47,8 @@ export default function GalleryMasonry() {
                 slideIndex={i}
                 width={600}
                 height={600}
-                className="h-auto w-full rounded-lg object-cover shadow-soft"
-                wrapperClassName="rounded-lg shadow-soft"
+                className="h-auto w-full rounded-lg object-contain shadow-soft"
+                wrapperClassName="rounded-lg bg-cream shadow-soft"
               />
             </figure>
           ))}

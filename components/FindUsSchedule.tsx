@@ -25,7 +25,7 @@ export default function FindUsSchedule() {
         <div className="container-narrow">
           <SectionHeading
             title="Weekly Truck Stops"
-            description="Rotating locations across Palm Beach County — follow @RaBenFlavorKitchen for today’s pin. We move; the schedule is your guide, not a single street address."
+            description="Stops and hours are confirmed by Chef Raben on @RaBenFlavorKitchen — not a fixed address."
           />
           <div
             ref={tableRef as React.RefObject<HTMLDivElement>}

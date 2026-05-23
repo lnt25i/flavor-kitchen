@@ -14,7 +14,7 @@ export default function AboutPage() {
             About
           </h1>
           <p className="text-lead mx-auto mt-6 max-w-md">
-            A mobile food truck — bold street food, made fresh across Palm Beach County.
+            Bold Flavor. Made Fresh. — Chef Raben&apos;s food truck across Palm Beach County.
           </p>
         </div>
       </section>

@@ -7,16 +7,9 @@ export default function StructuredData() {
     "@type": "FoodEstablishment",
     name: site.name,
     description:
-      "Chef Raben's food truck in West Palm Beach, FL. Bold Flavor. Made Fresh. Gyros, wraps, burgers, tacos, and quesadillas.",
+      "Chef Raben's food truck in West Palm Beach, FL. Bold Flavor. Made Fresh. Ten-item truck menu.",
     url: siteUrl,
     email: contact.email,
-    servesCuisine: [
-      "Haitian",
-      "American",
-      "Greek",
-      "French",
-      "Caribbean",
-    ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "West Palm Beach",

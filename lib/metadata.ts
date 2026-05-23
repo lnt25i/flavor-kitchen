@@ -3,7 +3,7 @@ import { site } from "./data";
 import { ogImage, siteUrl } from "./images";
 
 const defaultDescription =
-  "Flavor Kitchen by Chef Raben — West Palm Beach, FL. Bold Flavor. Made Fresh. The real truck menu: gyros, wraps, burgers, tacos, and more.";
+  "Flavor Kitchen by Chef Raben — West Palm Beach, FL food truck. Bold Flavor. Made Fresh. Ten items on the truck: gyros, wraps, cheesesteak, sandwiches, burgers, tacos, quesadilla.";
 
 export function createMetadata({
   title,
@@ -53,24 +53,24 @@ export const homeMetadata = createMetadata({});
 export const menuMetadata = createMetadata({
   title: "Menu",
   description:
-    "Tacos, burgers, sides, drinks, desserts, and chef specials — five cultures on one menu from Flavor Kitchen in Palm Beach County.",
+    "The ten items on the Flavor Kitchen truck — Chicken Gyro through Quesadilla. Photos and descriptions from Chef Raben’s menu graphics.",
   path: "/menu",
 });
 export const aboutMetadata = createMetadata({
   title: "About",
   description:
-    "Meet Chef Raben and the Flavor Kitchen food truck — mobile street food with five-culture fusion across Palm Beach County.",
+    "Flavor Kitchen is Chef Raben’s mobile food truck serving Palm Beach County. Bold Flavor. Made Fresh.",
   path: "/about",
 });
 export const findUsMetadata = createMetadata({
   title: "Find Us",
   description:
-    "Mobile food truck schedule — rotating Palm Beach County stops. Follow @RaBenFlavorKitchen for today’s location. Book the truck for events.",
+    "Find the Flavor Kitchen food truck — follow @RaBenFlavorKitchen for daily stops across Palm Beach County.",
   path: "/find-us",
 });
 export const contactMetadata = createMetadata({
   title: "Contact",
   description:
-    "Contact Flavor Kitchen for catering, events, and press. info@flavorkitchen.us · @RaBenFlavorKitchen",
+    "Contact Flavor Kitchen to book the food truck. info@flavorkitchen.us · @RaBenFlavorKitchen",
   path: "/contact",
 });

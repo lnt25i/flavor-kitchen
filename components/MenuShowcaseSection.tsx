@@ -2,21 +2,18 @@
 
 import { useCallback } from "react";
 import { animate } from "animejs";
-import { truckMenu } from "@/lib/data";
-import { images } from "@/lib/images";
-import { bounceIn, fadeUp, staggerFadeUp } from "@/lib/anime/presets";
+import { site, truckMenu } from "@/lib/data";
+import { menuItemCaption } from "@/lib/menu";
+import { fadeUp, staggerFadeUp } from "@/lib/anime/presets";
 import { useAnimeInView } from "@/hooks/useAnimeInView";
 import ClickableImage from "./lightbox/ClickableImage";
 import type { LightboxSlide } from "@/lib/lightbox";
 
-const showcaseSlides: LightboxSlide[] = truckMenu.map((item) => {
-  const photo = images.menuShowcase[item.showcaseImageKey];
-  return {
-    src: photo.src,
-    title: item.name,
-    description: `${item.description} — ${item.price}`,
-  };
-});
+const showcaseSlides: LightboxSlide[] = truckMenu.map((item) => ({
+  src: item.image,
+  title: item.name,
+  description: menuItemCaption(item),
+}));
 
 function handleCardHover(el: HTMLElement, entering: boolean) {
   animate(el, {
@@ -35,8 +32,6 @@ export default function MenuShowcaseSection() {
     useCallback((el) => {
       const cards = Array.from(el.querySelectorAll("[data-menu-card]")) as Element[];
       staggerFadeUp(cards, 60);
-      const prices = Array.from(el.querySelectorAll("[data-price]")) as Element[];
-      bounceIn(prices, 120);
     }, [])
   );
 
@@ -54,7 +49,7 @@ export default function MenuShowcaseSection() {
             Our Menu
           </h2>
           <p className="mt-4 text-base text-cream/65 sm:text-lg">
-            Every dish made fresh, every time.
+            {site.tagline}
           </p>
         </div>
 
@@ -62,51 +57,50 @@ export default function MenuShowcaseSection() {
           ref={gridRef as React.RefObject<HTMLDivElement>}
           className="mt-14 grid grid-cols-1 gap-8 opacity-0 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {truckMenu.map((item, index) => {
-            const photo = images.menuShowcase[item.showcaseImageKey];
-            return (
-              <article
-                key={item.number}
-                data-menu-card
-                className="menu-showcase-card flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-rich-black/60 opacity-0 shadow-soft"
-                onMouseEnter={(e) =>
-                  handleCardHover(e.currentTarget as HTMLElement, true)
-                }
-                onMouseLeave={(e) =>
-                  handleCardHover(e.currentTarget as HTMLElement, false)
-                }
-              >
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  <ClickableImage
-                    src={photo.src}
-                    alt={photo.alt}
-                    title={item.name}
-                    caption={`${item.description} — ${item.price}`}
-                    slides={showcaseSlides}
-                    slideIndex={index}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover"
-                    wrapperClassName="h-full w-full"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-xl font-semibold text-cream">
-                    {item.name}
-                  </h3>
-                  <p className="mt-2 line-clamp-1 text-sm text-cream/60">
+          {truckMenu.map((item, index) => (
+            <article
+              key={item.number}
+              data-menu-card
+              className="menu-showcase-card flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-rich-black/60 opacity-0 shadow-soft"
+              onMouseEnter={(e) =>
+                handleCardHover(e.currentTarget as HTMLElement, true)
+              }
+              onMouseLeave={(e) =>
+                handleCardHover(e.currentTarget as HTMLElement, false)
+              }
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream">
+                <ClickableImage
+                  src={item.image}
+                  alt={item.name}
+                  title={item.name}
+                  caption={menuItemCaption(item)}
+                  slides={showcaseSlides}
+                  slideIndex={index}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-contain"
+                  wrapperClassName="h-full w-full"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <p className="text-eyebrow">#{item.number}</p>
+                <h3 className="font-display text-xl font-semibold text-cream">
+                  {item.name}
+                </h3>
+                {item.description ? (
+                  <p className="mt-2 line-clamp-2 text-sm text-cream/60">
                     {item.description}
                   </p>
-                  <p
-                    data-price
-                    className="mt-4 font-sans text-lg font-semibold text-orange opacity-0"
-                  >
+                ) : null}
+                {item.price ? (
+                  <p className="mt-4 font-sans text-lg font-semibold text-orange">
                     {item.price}
                   </p>
-                </div>
-              </article>
-            );
-          })}
+                ) : null}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
