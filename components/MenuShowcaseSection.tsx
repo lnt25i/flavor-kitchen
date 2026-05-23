@@ -38,9 +38,8 @@ export default function MenuShowcaseSection() {
   );
 
   return (
-    <section className="relative bg-gradient-to-b from-rich-black via-charcoal to-rich-black py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-rich-black to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-rich-black to-transparent" />
+    <section className="relative py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-charcoal/75 backdrop-blur-sm" />
 
       <div className="container-narrow relative px-4 sm:px-6">
         <div

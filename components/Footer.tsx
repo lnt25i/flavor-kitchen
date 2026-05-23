@@ -19,7 +19,7 @@ export default function Footer() {
   return (
     <footer
       ref={ref as React.RefObject<HTMLElement>}
-      className="border-t border-cream/10 bg-rich-black opacity-0"
+      className="border-t border-cream/10 bg-rich-black/85 opacity-0 backdrop-blur-md"
     >
       <div className="container-narrow section-spacious !py-14">
         <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">

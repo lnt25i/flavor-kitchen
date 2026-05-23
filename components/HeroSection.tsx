@@ -85,7 +85,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-rich-black pt-24 md:pt-28"
+      className="pt-24 md:pt-28"
     >
       <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2">

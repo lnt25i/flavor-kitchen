@@ -21,11 +21,11 @@
   }
 
   .section-dark {
-    @apply bg-charcoal text-cream;
+    @apply bg-charcoal/80 text-cream backdrop-blur-md;
   }
 
   .section-light {
-    @apply bg-cream text-charcoal;
+    @apply bg-cream/90 text-charcoal backdrop-blur-md;
   }
 
   .container-narrow {
@@ -37,7 +37,7 @@
   }
 
   .card-premium {
-    @apply rounded-2xl border border-cream/10 bg-charcoal/50 shadow-soft;
+    @apply rounded-2xl border border-cream/10 bg-charcoal/70 shadow-soft backdrop-blur-sm;
   }
 
   .btn-primary {
