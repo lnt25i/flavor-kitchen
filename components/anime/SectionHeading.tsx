@@ -1,6 +1,6 @@
 "use client";
 
-import AnimateInView from "./AnimateInView";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 interface SectionHeadingProps {
   title: string;
@@ -20,7 +20,7 @@ export default function SectionHeading({
   const alignClass = align === "center" ? "text-center" : "text-left";
 
   return (
-    <AnimateInView preset="fadeUp" className={`${alignClass} ${className}`}>
+    <ScrollReveal className={`${alignClass} ${className}`}>
       <h2
         className={`font-display text-3xl font-semibold sm:text-4xl ${
           light ? "text-cream" : "text-charcoal"
@@ -37,6 +37,6 @@ export default function SectionHeading({
           {description}
         </p>
       )}
-    </AnimateInView>
+    </ScrollReveal>
   );
 }

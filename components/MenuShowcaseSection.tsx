@@ -38,7 +38,7 @@ export default function MenuShowcaseSection() {
   );
 
   return (
-    <section className="relative py-20 sm:py-28">
+    <section className="relative section-premium-edge py-20 sm:py-28">
       <div className="pointer-events-none absolute inset-0 bg-charcoal/75 backdrop-blur-sm" />
 
       <div className="container-narrow relative px-4 sm:px-6">

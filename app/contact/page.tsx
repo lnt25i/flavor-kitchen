@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import AnimateInView from "@/components/anime/AnimateInView";
+import PageHeaderReveal from "@/components/animations/PageHeaderReveal";
 import { contact, site } from "@/lib/data";
 import { contactMetadata } from "@/lib/metadata";
 
@@ -9,25 +10,19 @@ export const metadata: Metadata = contactMetadata;
 export default function ContactPage() {
   return (
     <>
-      <section className="section-dark border-b border-cream/10 pt-32 pb-16 text-center">
-        <div className="container-narrow px-4">
-          <h1 className="font-display text-4xl font-semibold text-cream sm:text-5xl">
-            Contact
-          </h1>
-          <p className="text-lead mx-auto mt-6 max-w-md">
-            Catering, events, or press — we&apos;re here.
-          </p>
-        </div>
-      </section>
+      <PageHeaderReveal
+        title="Contact"
+        description="Catering, events, or press — we're here."
+      />
 
-      <section className="section-dark section-spacious">
+      <section className="section-dark section-spacious section-premium-edge">
         <div className="container-narrow grid gap-16 lg:grid-cols-5">
           <AnimateInView preset="fadeUp" className="lg:col-span-3">
             <ContactForm />
           </AnimateInView>
 
           <AnimateInView preset="slideRight" className="lg:col-span-2">
-            <div className="rounded-2xl border border-cream/10 p-8 shadow-soft">
+            <div className="card-premium p-8">
               <p className="text-eyebrow">Email</p>
               <a
                 href={`mailto:${contact.email}`}

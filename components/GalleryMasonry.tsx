@@ -33,7 +33,7 @@ export default function GalleryMasonry() {
   });
 
   return (
-    <section className="section-dark section-spacious">
+    <section className="section-dark section-spacious section-premium-edge">
       <div className="container-narrow">
         <SectionHeading
           title="Gallery"

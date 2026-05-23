@@ -21,7 +21,7 @@ export default function FindUsSchedule() {
 
   return (
     <>
-      <section className="section-dark section-spacious">
+      <section className="section-dark section-spacious section-premium-edge">
         <div className="container-narrow">
           <SectionHeading
             title="Weekly Truck Stops"
@@ -61,7 +61,7 @@ export default function FindUsSchedule() {
         </div>
       </section>
 
-      <section className="section-dark section-spacious border-t border-cream/10">
+      <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow">
           <AnimateInView preset="fadeUp">
             <h2 className="font-display text-2xl font-semibold text-cream">
@@ -80,7 +80,7 @@ export default function FindUsSchedule() {
         </div>
       </section>
 
-      <section className="section-dark section-spacious border-t border-cream/10">
+      <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow grid gap-14 md:grid-cols-2">
           <AnimateInView preset="slideLeft">
             <h2 className="font-display text-2xl font-semibold text-cream">Hours</h2>

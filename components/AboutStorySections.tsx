@@ -53,7 +53,7 @@ export default function AboutStorySections() {
 
   return (
     <>
-      <section className="section-dark section-spacious">
+      <section className="section-dark section-spacious section-premium-edge">
         <div className="container-narrow grid items-center gap-14 lg:grid-cols-2">
           <ClickableImage
             src={images.chef.portrait.src}
@@ -80,7 +80,7 @@ export default function AboutStorySections() {
         </div>
       </section>
 
-      <section className="section-dark section-spacious border-t border-cream/10">
+      <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow">
           <SectionHeading
             title="The Truck Menu"
@@ -102,7 +102,7 @@ export default function AboutStorySections() {
         </div>
       </section>
 
-      <section className="section-dark section-spacious border-t border-cream/10">
+      <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow">
           <SectionHeading
             title="From the Window"
@@ -139,7 +139,7 @@ export default function AboutStorySections() {
         </div>
       </section>
 
-      <section className="section-light section-spacious">
+      <section className="section-light section-spacious section-premium-edge">
         <div className="container-narrow text-center">
           <SectionHeading
             title={site.location}

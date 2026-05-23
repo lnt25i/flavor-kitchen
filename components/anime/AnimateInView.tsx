@@ -2,8 +2,10 @@
 
 import { useCallback, type ReactNode } from "react";
 import { useAnimeInView } from "@/hooks/useAnimeInView";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import {
   bounceIn,
+  fadeIn,
   fadeUp,
   scaleIn,
   slideFromLeft,
@@ -32,8 +34,14 @@ export default function AnimateInView({
   preset = "fadeUp",
   childSelector,
 }: AnimateInViewProps) {
+  const reducedMotion = usePrefersReducedMotion();
+
   const onEnter = useCallback(
     (el: HTMLElement) => {
+      if (reducedMotion) {
+        fadeIn(el);
+        return;
+      }
       if (preset === "staggerChildren") {
         const targets = childSelector
           ? el.querySelectorAll(childSelector)
@@ -50,7 +58,7 @@ export default function AnimateInView({
       } as const;
       runners[preset as keyof typeof runners]?.(el);
     },
-    [preset, childSelector]
+    [preset, childSelector, reducedMotion]
   );
 
   const ref = useAnimeInView(onEnter);

@@ -61,7 +61,7 @@ export default function MenuPageContent() {
   }, [animateCards]);
 
   return (
-    <section className="section-dark section-spacious">
+    <section className="section-dark section-spacious section-premium-edge">
       <div className="container-narrow">
         <p className="text-center text-sm text-cream/50">
           All twenty owner menu photos — two styles per item. Tap to enlarge.

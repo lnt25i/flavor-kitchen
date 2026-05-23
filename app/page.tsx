@@ -2,6 +2,7 @@ import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
 import MenuShowcaseSection from "@/components/MenuShowcaseSection";
 import AnimateInView from "@/components/anime/AnimateInView";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 import SectionHeading from "@/components/anime/SectionHeading";
 import ClickableImage from "@/components/lightbox/ClickableImage";
 import { chefStory, contact, site } from "@/lib/data";
@@ -23,7 +24,7 @@ export default function HomePage() {
 
       <MenuShowcaseSection />
 
-      <section className="section-dark section-spacious border-t border-cream/10">
+      <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow grid items-center gap-14 lg:grid-cols-2">
           <AnimateInView preset="fadeUp">
             <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
@@ -50,45 +51,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-light section-spacious">
+      <section className="section-light section-spacious section-premium-edge">
         <div className="container-narrow text-center">
-          <AnimateInView preset="fadeUp">
+          <ScrollReveal>
             <p className="font-display text-2xl italic leading-relaxed text-charcoal sm:text-3xl">
               &ldquo;{site.tagline}&rdquo;
             </p>
             <p className="text-lead-dark mt-6">
               — Flavor Kitchen food truck, {site.location}
             </p>
-          </AnimateInView>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="section-dark section-spacious border-t border-cream/10">
+      <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow text-center">
           <SectionHeading
             title="Find the Truck"
             description={chefStory.palmBeach}
           />
-          <Link href="/find-us" className="btn-primary mt-10 inline-flex">
-            Find Us
-          </Link>
+          <ScrollReveal delay={150}>
+            <Link href="/find-us" className="btn-primary mt-10 inline-flex">
+              Find Us
+            </Link>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="section-dark section-spacious border-t border-cream/10">
+      <section className="section-dark section-spacious section-premium-edge border-t border-cream/10">
         <div className="container-narrow text-center">
           <SectionHeading
             title={`Follow ${site.socialHandle}`}
             description="Daily truck location and menu updates on Instagram."
           />
-          <a
-            href={contact.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary mt-10 inline-flex"
-          >
-            Instagram
-          </a>
+          <ScrollReveal delay={150}>
+            <a
+              href={contact.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary mt-10 inline-flex"
+            >
+              Instagram
+            </a>
+          </ScrollReveal>
         </div>
       </section>
     </>
