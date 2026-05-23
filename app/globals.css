@@ -2,26 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-cream font-sans text-charcoal antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@layer components {
+  .section-padding {
+    @apply px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .container-narrow {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-orange px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-cream transition-all duration-300 hover:bg-charcoal hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2 focus:ring-offset-cream;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border-2 border-charcoal bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-charcoal transition-all duration-300 hover:bg-charcoal hover:text-cream focus:outline-none focus:ring-2 focus:ring-charcoal focus:ring-offset-2;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  .fade-in-view {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+
+  .fade-in-view.visible {
+    @apply opacity-100 translate-y-0;
   }
 }
