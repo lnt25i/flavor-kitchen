@@ -2,72 +2,128 @@
 
 export const images = {
   hero: {
-    // REPLACE WITH REAL PHOTO: food truck at service window, golden hour
-    src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1920&q=80",
-    alt: "Flavor Kitchen food truck serving fresh meals",
+    // REPLACE WITH REAL PHOTO: Flavor Kitchen food truck at night, Palm Beach County
+    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=80",
+    alt: "Flavor Kitchen food truck serving guests in Palm Beach County",
   },
   featured: {
-    jerkChicken: {
-      // REPLACE WITH REAL PHOTO: signature jerk chicken plate
-      src: "https://images.unsplash.com/photo-1608039755401-4566d6ac4c58?w=800&q=80",
-      alt: "Jerk chicken with rice and peas",
+    jerkTaco: {
+      src: "/images/gallery/07-chicken-tacos.png",
+      alt: "Caribbean Jerk Chicken Taco from Flavor Kitchen",
     },
-    plantainBowl: {
-      // REPLACE WITH REAL PHOTO: Caribbean plantain bowl
-      src: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
-      alt: "Plantain power bowl with fresh toppings",
+    rabenBurger: {
+      src: "/images/gallery/05-raben-classic-burger.png",
+      alt: "The Raben Classic Burger from Flavor Kitchen",
     },
-    seafoodPoBoy: {
-      // REPLACE WITH REAL PHOTO: seafood po'boy
-      src: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80",
-      alt: "Crispy seafood po'boy",
+    gyro: {
+      src: "/images/gallery/01-chicken-gyro.png",
+      alt: "Chicken Gyro Chef Special from Flavor Kitchen",
     },
   },
   chef: {
     portrait: {
-      // REPLACE WITH REAL PHOTO: Chef Raben in kitchen or at truck
+      // REPLACE WITH REAL PHOTO: Chef Raben portrait, professional kitchen or truck
       src: "https://images.unsplash.com/photo-1574489441779-0bb9a4d4d0e8?w=800&q=80",
       alt: "Chef Raben preparing food",
     },
     cooking: {
-      // REPLACE WITH REAL PHOTO: chef at grill or prep station
+      // REPLACE WITH REAL PHOTO: Chef Raben at grill or prep station
       src: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80",
-      alt: "Chef cooking on the line",
+      alt: "Chef Raben cooking on the line",
     },
     truck: {
-      // REPLACE WITH REAL PHOTO: Flavor Kitchen truck exterior
-      src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
-      alt: "Food truck at a community event",
+      // REPLACE WITH REAL PHOTO: Flavor Kitchen truck exterior, Palm Beach event
+      src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80",
+      alt: "Flavor Kitchen food truck at a community event",
+    },
+  },
+  cuisines: {
+    haiti: {
+      // REPLACE WITH REAL PHOTO: Haitian cuisine inspiration
+      src: "https://images.unsplash.com/photo-1604908176997-431404ef1f9c?w=400&q=80",
+      alt: "Haitian culinary inspiration",
+    },
+    usa: {
+      // REPLACE WITH REAL PHOTO: American classic burger culture
+      src: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80",
+      alt: "American cuisine inspiration",
+    },
+    greece: {
+      // REPLACE WITH REAL PHOTO: Greek Mediterranean food
+      src: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80",
+      alt: "Greek cuisine inspiration",
+    },
+    france: {
+      // REPLACE WITH REAL PHOTO: French culinary technique
+      src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80",
+      alt: "French cuisine inspiration",
+    },
+    caribbean: {
+      // REPLACE WITH REAL PHOTO: Caribbean tropical flavors
+      src: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80",
+      alt: "Caribbean cuisine inspiration",
     },
   },
   gallery: [
     {
-      // REPLACE WITH REAL PHOTO: crowd at truck
-      src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80",
-      alt: "Guests enjoying street food",
+      src: "/images/gallery/01-chicken-gyro.png",
+      alt: "Chicken Gyro — Flavor Kitchen menu",
+      name: "Chicken Gyro",
     },
     {
-      // REPLACE WITH REAL PHOTO: plated special
-      src: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=600&q=80",
-      alt: "Chef's special plated dish",
+      src: "/images/gallery/02-green-chicken-wrap.png",
+      alt: "Green Chicken Wrap — Flavor Kitchen menu",
+      name: "Green Chicken Wrap",
     },
     {
-      // REPLACE WITH REAL PHOTO: catering setup
-      src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80",
-      alt: "Catering spread at private event",
+      src: "/images/gallery/03-philly-cheesesteak.png",
+      alt: "Philly Cheesesteak — Flavor Kitchen menu",
+      name: "Philly Cheesesteak",
     },
     {
-      // REPLACE WITH REAL PHOTO: team or community moment
-      src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80",
-      alt: "Dining at an outdoor venue",
+      src: "/images/gallery/04-chicken-sandwich.png",
+      alt: "Chicken Sandwich — Flavor Kitchen menu",
+      name: "Chicken Sandwich",
+    },
+    {
+      src: "/images/gallery/05-raben-classic-burger.png",
+      alt: "Raben Classic Burger — Flavor Kitchen menu",
+      name: "Raben Classic Burger",
+    },
+    {
+      src: "/images/gallery/06-hamburger.png",
+      alt: "Hamburger — Flavor Kitchen menu",
+      name: "Hamburger",
+    },
+    {
+      src: "/images/gallery/07-chicken-tacos.png",
+      alt: "Chicken Tacos — Flavor Kitchen menu",
+      name: "Chicken Tacos",
+    },
+    {
+      src: "/images/gallery/08-fish-tacos.png",
+      alt: "Fish Tacos — Flavor Kitchen menu",
+      name: "Fish Tacos",
+    },
+    {
+      src: "/images/gallery/09-steak-tacos.png",
+      alt: "Steak Tacos — Flavor Kitchen menu",
+      name: "Steak Tacos",
+    },
+    {
+      src: "/images/gallery/10-quesadilla.png",
+      alt: "Quesadilla — Flavor Kitchen menu",
+      name: "Quesadilla",
     },
   ],
   menu: {
-    appetizers: "https://images.unsplash.com/photo-1601050690597-df0568fa7098?w=600&q=80",
-    mains: "https://images.unsplash.com/photo-1563379926895-4fbb64b0424e?w=600&q=80",
-    sides: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=600&q=80",
-    drinks: "https://images.unsplash.com/photo-1546173159-315724a31696?w=600&q=80",
-    desserts: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80",
+    Tacos: "https://images.unsplash.com/photo-1565299585323-38bd4fda1e42?w=600&q=80",
+    Burgers: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80",
+    Sides: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=600&q=80",
+    Drinks: "https://images.unsplash.com/photo-1546173159-315724a31696?w=600&q=80",
+    Desserts: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80",
+    "Chef Specials":
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80",
   },
 } as const;
 

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { site } from "./data";
 import { ogImage, siteUrl } from "./images";
 
-const defaultTitle = "Flavor Kitchen by Chef Raben | Food Truck";
 const defaultDescription =
-  "Bold Caribbean-inspired street food from Chef Raben. Fresh ingredients, premium plates, and a food truck experience worth seeking out.";
+  "Chef Raben's food truck in Palm Beach County, Florida. Haitian roots meet American, Greek, French, and Caribbean flavors — tacos, burgers, and chef specials.";
 
 export function createMetadata({
   title,
@@ -14,7 +14,9 @@ export function createMetadata({
   description?: string;
   path?: string;
 }): Metadata {
-  const pageTitle = title ? `${title} | Flavor Kitchen` : defaultTitle;
+  const pageTitle = title
+    ? `${title} | Flavor Kitchen by Chef Raben`
+    : `${site.name} | Food Truck`;
   const url = `${siteUrl}${path}`;
 
   return {
@@ -26,7 +28,7 @@ export function createMetadata({
       title: pageTitle,
       description,
       url,
-      siteName: "Flavor Kitchen by Chef Raben",
+      siteName: site.name,
       locale: "en_US",
       type: "website",
       images: [
@@ -34,7 +36,7 @@ export function createMetadata({
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: "Flavor Kitchen food truck",
+          alt: "Flavor Kitchen by Chef Raben food truck",
         },
       ],
     },
@@ -51,24 +53,24 @@ export const homeMetadata = createMetadata({});
 export const menuMetadata = createMetadata({
   title: "Menu",
   description:
-    "Explore the Flavor Kitchen menu — appetizers, mains, sides, drinks, and desserts crafted by Chef Raben.",
+    "Tacos, burgers, sides, drinks, desserts, and chef specials — five cultures on one menu from Flavor Kitchen in Palm Beach County.",
   path: "/menu",
 });
 export const aboutMetadata = createMetadata({
   title: "About",
   description:
-    "Meet Chef Raben and discover the story behind Flavor Kitchen — Caribbean roots, Southern soul, and street food elevated.",
+    "Born in Haiti, trained by the world. Meet Chef Raben and discover the five-cuisine vision behind Flavor Kitchen.",
   path: "/about",
 });
 export const findUsMetadata = createMetadata({
   title: "Find Us",
   description:
-    "Weekly schedule, locations, and hours for Flavor Kitchen. Book us for your next event or festival.",
+    "Weekly schedule and locations across Palm Beach County, Florida. Book Flavor Kitchen for your next event.",
   path: "/find-us",
 });
 export const contactMetadata = createMetadata({
   title: "Contact",
   description:
-    "Get in touch with Flavor Kitchen for catering, events, press, or general inquiries.",
+    "Contact Flavor Kitchen for catering, events, and press. info@flavorkitchen.us · @Rabenflavorkitchen",
   path: "/contact",
 });

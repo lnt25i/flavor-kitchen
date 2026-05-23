@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import { contact } from "@/lib/data";
+import { contact, site } from "@/lib/data";
+import { fadeUp } from "@/lib/anime/presets";
+import { useAnimeInView } from "@/hooks/useAnimeInView";
 
 const footerLinks = [
   { href: "/menu", label: "Menu" },
@@ -9,16 +13,18 @@ const footerLinks = [
 ];
 
 export default function Footer() {
+  const ref = useAnimeInView((el) => fadeUp(el));
+
   return (
-    <footer className="bg-charcoal text-cream">
+    <footer ref={ref as React.RefObject<HTMLElement>} className="bg-rich-black text-cream opacity-0">
       <div className="section-padding !py-12">
         <div className="container-narrow grid gap-12 md:grid-cols-3">
           <div>
             <p className="font-display text-2xl font-semibold">Flavor Kitchen</p>
             <p className="mt-1 text-sm text-gold">by Chef Raben</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/80">
-              Bold Caribbean-inspired street food served with heart. Follow us
-              for weekly locations and seasonal specials.
+              {site.tagline} Serving {site.location} with five cultures on one
+              menu.
             </p>
           </div>
 
@@ -31,7 +37,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-cream/80 transition-colors duration-300 hover:text-orange"
+                    className="text-sm text-cream/80 hover:text-orange"
                   >
                     {link.label}
                   </Link>
@@ -48,17 +54,19 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="transition-colors duration-300 hover:text-orange"
+                  className="hover:text-orange"
                 >
                   {contact.email}
                 </a>
               </li>
               <li>
                 <a
-                  href={`tel:${contact.phone.replace(/\D/g, "")}`}
-                  className="transition-colors duration-300 hover:text-orange"
+                  href={contact.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-orange"
                 >
-                  {contact.phone}
+                  {site.socialHandle}
                 </a>
               </li>
             </ul>
@@ -67,7 +75,7 @@ export default function Footer() {
                 href={contact.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm uppercase tracking-wider text-cream/80 transition-colors duration-300 hover:text-orange"
+                className="text-sm uppercase tracking-wider text-cream/80 hover:text-orange"
                 aria-label="Instagram"
               >
                 IG
@@ -76,7 +84,7 @@ export default function Footer() {
                 href={contact.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm uppercase tracking-wider text-cream/80 transition-colors duration-300 hover:text-orange"
+                className="text-sm uppercase tracking-wider text-cream/80 hover:text-orange"
                 aria-label="Facebook"
               >
                 FB
@@ -85,7 +93,7 @@ export default function Footer() {
                 href={contact.social.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm uppercase tracking-wider text-cream/80 transition-colors duration-300 hover:text-orange"
+                className="text-sm uppercase tracking-wider text-cream/80 hover:text-orange"
                 aria-label="TikTok"
               >
                 TT
@@ -99,7 +107,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Flavor Kitchen by Chef Raben. All
             rights reserved.
           </p>
-          <p className="mt-1">flavorkitchen.us</p>
+          <p className="mt-1">flavorkitchen.us · {site.location}</p>
         </div>
       </div>
     </footer>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import PageTransition from "@/components/anime/PageTransition";
+import StructuredData from "@/components/StructuredData";
 import { homeMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -27,8 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="min-h-screen">
+        <StructuredData />
         <Header />
-        <main>{children}</main>
+        <PageTransition>
+          <main>{children}</main>
+        </PageTransition>
         <Footer />
       </body>
     </html>
