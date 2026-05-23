@@ -66,14 +66,14 @@ export default function AboutStorySections() {
             className="h-auto w-full object-contain"
             wrapperClassName="w-full rounded-2xl shadow-soft"
           />
-          <div ref={storyRef as React.RefObject<HTMLDivElement>} className="opacity-0">
+          <div ref={storyRef as React.RefObject<HTMLDivElement>}>
             <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
               Chef Raben
             </h2>
-            <p data-story-p className="text-lead mt-8 opacity-0">
+            <p data-story-p className="text-lead mt-8">
               {chefStory.foodTruck}
             </p>
-            <p data-story-p className="text-lead mt-6 opacity-0">
+            <p data-story-p className="text-lead mt-6">
               {chefStory.truckMenu}
             </p>
           </div>
@@ -111,28 +111,30 @@ export default function AboutStorySections() {
           />
           <div
             ref={foodRef as React.RefObject<HTMLDivElement>}
-            className="mt-10 grid grid-cols-2 gap-4 opacity-0 sm:grid-cols-3"
+            className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
             {aboutFoodPhotos.map((item) => (
               <div
                 key={item.number}
                 data-about-food
-                className="overflow-hidden rounded-xl opacity-0 shadow-soft"
+                className="overflow-hidden rounded-xl shadow-soft"
               >
-                <ClickableImage
-                  src={item.image}
-                  alt={item.name}
-                  title={item.name}
-                  caption={menuItemCaption(item)}
-                  price={item.price}
-                  slides={menuSlides}
-                  slideIndex={findLightboxIndex(item.image)}
-                  width={400}
-                  height={400}
-                  unoptimized
-                  className="h-auto w-full object-contain"
-                  wrapperClassName="w-full bg-rich-black"
-                />
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-rich-black">
+                  <ClickableImage
+                    src={item.image}
+                    alt={item.name}
+                    title={item.name}
+                    caption={menuItemCaption(item)}
+                    price={item.price}
+                    slides={menuSlides}
+                    slideIndex={findLightboxIndex(item.image)}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                    className="object-cover"
+                    wrapperClassName="absolute inset-0 h-full w-full"
+                  />
+                </div>
               </div>
             ))}
           </div>

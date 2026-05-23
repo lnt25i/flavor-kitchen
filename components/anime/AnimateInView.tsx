@@ -5,7 +5,6 @@ import { useAnimeInView } from "@/hooks/useAnimeInView";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import {
   bounceIn,
-  fadeIn,
   fadeUp,
   scaleIn,
   slideFromLeft,
@@ -38,10 +37,7 @@ export default function AnimateInView({
 
   const onEnter = useCallback(
     (el: HTMLElement) => {
-      if (reducedMotion) {
-        fadeIn(el);
-        return;
-      }
+      if (reducedMotion) return;
       if (preset === "staggerChildren") {
         const targets = childSelector
           ? el.querySelectorAll(childSelector)
@@ -64,7 +60,7 @@ export default function AnimateInView({
   const ref = useAnimeInView(onEnter);
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className={`opacity-0 ${className}`}>
+    <div ref={ref as React.RefObject<HTMLDivElement>} className={className}>
       {children}
     </div>
   );

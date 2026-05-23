@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import ScrollReveal from "@/components/animations/ScrollReveal";
 import { fadeUp } from "@/lib/anime/presets";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { site } from "@/lib/data";
@@ -53,9 +52,9 @@ export default function HeroSection() {
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (taglineRef.current) fadeUp(taglineRef.current, reducedMotion ? 0 : 700);
-    if (badgeRef.current) fadeUp(badgeRef.current, reducedMotion ? 0 : 900);
-    if (ctaRef.current) fadeUp(ctaRef.current, reducedMotion ? 0 : 1100);
+    if (taglineRef.current) fadeUp(taglineRef.current, reducedMotion ? 0 : 400);
+    if (badgeRef.current) fadeUp(badgeRef.current, reducedMotion ? 0 : 550);
+    if (ctaRef.current) fadeUp(ctaRef.current, reducedMotion ? 0 : 700);
   }, [reducedMotion]);
 
   useEffect(() => {
@@ -92,40 +91,38 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} className="section-premium-edge pt-24 md:pt-28">
-      <ScrollReveal>
-        <div className="w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div ref={leftWrapRef} className="w-full will-change-transform">
-              <ClickableImage
-                src={images.hero.left.src}
-                alt={images.hero.left.alt}
-                title="Flavor Kitchen — Left Side"
-                slides={truckSlides}
-                slideIndex={0}
-                width={1200}
-                height={800}
-                priority
-                className="h-auto w-full object-contain"
-                wrapperClassName="w-full"
-              />
-            </div>
-            <div ref={rightWrapRef} className="w-full will-change-transform">
-              <ClickableImage
-                src={images.hero.right.src}
-                alt={images.hero.right.alt}
-                title="Flavor Kitchen — Right Side"
-                slides={truckSlides}
-                slideIndex={1}
-                width={1200}
-                height={800}
-                priority
-                className="h-auto w-full object-contain"
-                wrapperClassName="w-full"
-              />
-            </div>
+      <div className="w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div ref={leftWrapRef} className="w-full will-change-transform">
+            <ClickableImage
+              src={images.hero.left.src}
+              alt={images.hero.left.alt}
+              title="Flavor Kitchen — Left Side"
+              slides={truckSlides}
+              slideIndex={0}
+              width={1200}
+              height={800}
+              priority
+              className="h-auto w-full object-contain"
+              wrapperClassName="w-full"
+            />
+          </div>
+          <div ref={rightWrapRef} className="w-full will-change-transform">
+            <ClickableImage
+              src={images.hero.right.src}
+              alt={images.hero.right.alt}
+              title="Flavor Kitchen — Right Side"
+              slides={truckSlides}
+              slideIndex={1}
+              width={1200}
+              height={800}
+              priority
+              className="h-auto w-full object-contain"
+              wrapperClassName="w-full"
+            />
           </div>
         </div>
-      </ScrollReveal>
+      </div>
 
       <div className="container-narrow section-spacious !pt-16 text-center">
         <LetterHeadline
@@ -134,22 +131,20 @@ export default function HeroSection() {
         />
         <p
           ref={taglineRef}
-          className="mt-6 font-display text-xl italic text-gold opacity-0 sm:text-2xl"
+          className="mt-6 font-display text-xl italic text-gold sm:text-2xl"
         >
           {site.tagline}
         </p>
         <div
           ref={badgeRef}
-          className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-cream/20 bg-charcoal/50 px-5 py-2.5 text-sm text-cream/80 opacity-0 backdrop-blur-sm"
+          className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-cream/20 bg-charcoal/50 px-5 py-2.5 text-sm text-cream/80 backdrop-blur-sm"
         >
           <PinIcon />
           <span>{site.location}</span>
         </div>
         <div className="mt-12">
           <Link href="/menu" className="btn-primary">
-            <span ref={ctaRef} className="inline-block opacity-0">
-              Explore Our Menu
-            </span>
+            <span ref={ctaRef}>Explore Our Menu</span>
           </Link>
         </div>
       </div>

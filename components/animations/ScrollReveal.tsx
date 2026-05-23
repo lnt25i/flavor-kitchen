@@ -5,10 +5,10 @@ import { useEffect, useRef, type ReactNode } from "react";
 type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
-  /** Stagger delay in ms */
   delay?: number;
 };
 
+/** Wrapper that never hides content — images and text stay visible by default. */
 export default function ScrollReveal({
   children,
   className = "",
@@ -19,25 +19,13 @@ export default function ScrollReveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("scroll-reveal-visible");
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
+    el.classList.add("scroll-reveal-visible");
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`scroll-reveal ${className}`}
+      className={`scroll-reveal scroll-reveal-visible ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}

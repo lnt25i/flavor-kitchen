@@ -1,8 +1,7 @@
 "use client";
 
 import Image, { type ImageProps } from "next/image";
-import { useRef } from "react";
-import { hoverImageOverlay } from "@/lib/anime/hover";
+import type { KeyboardEvent } from "react";
 import { useLightbox } from "./LightboxProvider";
 import type { LightboxSlide } from "@/lib/lightbox";
 
@@ -28,7 +27,6 @@ export default function ClickableImage({
   ...imageProps
 }: ClickableImageProps) {
   const { open } = useLightbox();
-  const overlayRef = useRef<HTMLSpanElement>(null);
   const src = typeof imageProps.src === "string" ? imageProps.src : "";
 
   const singleSlide: LightboxSlide = {
@@ -46,18 +44,21 @@ export default function ClickableImage({
     }
   }
 
-  function handleOverlayHover(entering: boolean) {
-    if (overlayRef.current) hoverImageOverlay(overlayRef.current, entering);
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleOpen();
+    }
   }
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={handleOpen}
-      onMouseEnter={() => handleOverlayHover(true)}
-      onMouseLeave={() => handleOverlayHover(false)}
-      className={`relative block cursor-zoom-in overflow-hidden border-0 bg-transparent p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black ${
-        fill ? "h-full w-full" : ""
+      onKeyDown={handleKeyDown}
+      className={`relative block cursor-zoom-in overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-rich-black ${
+        fill ? "h-full min-h-0 w-full" : ""
       } ${wrapperClassName}`}
       aria-label={`View full size: ${title ?? alt ?? "image"}`}
     >
@@ -67,12 +68,6 @@ export default function ClickableImage({
         className={className || (fill ? "object-cover" : "")}
         {...imageProps}
       />
-      <span
-        ref={overlayRef}
-        className="pointer-events-none absolute inset-0"
-        style={{ backgroundColor: "rgba(13, 13, 13, 0)" }}
-        aria-hidden
-      />
-    </button>
+    </div>
   );
 }

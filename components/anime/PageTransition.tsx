@@ -2,34 +2,24 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
-import { animate } from "animejs";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const ref = useRef<HTMLDivElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || reducedMotion) return;
 
-    animate(el, {
-      opacity: [0, 1],
-      translateY: [10, 0],
-      duration: 450,
-      ease: "outCubic",
-    });
-
-    return () => {
-      animate(el, {
-        opacity: [1, 0],
-        duration: 200,
-        ease: "inCubic",
-      });
-    };
-  }, [pathname]);
+    el.classList.remove("page-enter");
+    void el.offsetWidth;
+    el.classList.add("page-enter");
+  }, [pathname, reducedMotion]);
 
   return (
-    <div ref={ref} className="opacity-0">
+    <div ref={ref} className="page-transition">
       {children}
     </div>
   );

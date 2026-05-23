@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { animate } from "animejs";
 import { site, truckMenu } from "@/lib/data";
 import { hoverImageBrightness } from "@/lib/anime/hover";
-import { bounceIn, fadeUp, staggerFadeUp } from "@/lib/anime/presets";
+import { fadeUp } from "@/lib/anime/presets";
 import { getAllMenuLightboxSlides } from "@/lib/menu-photos";
 import { menuItemCaption, hasMenuPrice } from "@/lib/menu";
 import { useAnimeInView } from "@/hooks/useAnimeInView";
@@ -15,9 +15,9 @@ const allSlides = getAllMenuLightboxSlides();
 
 function handleCardHover(card: HTMLElement, entering: boolean) {
   animate(card, {
-    scale: entering ? 1.04 : 1,
+    scale: entering ? 1.02 : 1,
     boxShadow: entering
-      ? "0 20px 56px rgba(0, 0, 0, 0.5)"
+      ? "0 16px 48px rgba(0, 0, 0, 0.45)"
       : "0 8px 32px rgba(0, 0, 0, 0.24)",
     duration: 200,
     ease: "outCubic",
@@ -28,24 +28,13 @@ function handleCardHover(card: HTMLElement, entering: boolean) {
 
 export default function MenuShowcaseSection() {
   const headingRef = useAnimeInView(useCallback((el) => fadeUp(el), []));
-  const gridRef = useAnimeInView(
-    useCallback((el) => {
-      const cards = Array.from(el.querySelectorAll("[data-menu-card]")) as Element[];
-      staggerFadeUp(cards, 60);
-      const prices = Array.from(el.querySelectorAll("[data-price]")) as Element[];
-      if (prices.length) bounceIn(prices, 120);
-    }, [])
-  );
 
   return (
     <section className="relative section-premium-edge py-20 sm:py-28">
       <div className="pointer-events-none absolute inset-0 bg-charcoal/75 backdrop-blur-sm" />
 
       <div className="container-narrow relative px-4 sm:px-6">
-        <div
-          ref={headingRef as React.RefObject<HTMLDivElement>}
-          className="text-center opacity-0"
-        >
+        <div ref={headingRef as React.RefObject<HTMLDivElement>} className="text-center">
           <h2 className="font-display text-4xl font-semibold text-cream sm:text-5xl">
             Our Menu
           </h2>
@@ -54,15 +43,11 @@ export default function MenuShowcaseSection() {
           </p>
         </div>
 
-        <div
-          ref={gridRef as React.RefObject<HTMLDivElement>}
-          className="mt-14 grid grid-cols-1 gap-8 opacity-0 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
           {truckMenu.map((item) => (
             <article
               key={item.number}
-              data-menu-card
-              className="menu-showcase-card flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-rich-black/60 opacity-0 shadow-soft"
+              className="menu-showcase-card flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-rich-black/70 shadow-soft backdrop-blur-sm"
               onMouseEnter={(e) =>
                 handleCardHover(e.currentTarget as HTMLElement, true)
               }
@@ -79,10 +64,10 @@ export default function MenuShowcaseSection() {
                   slides={allSlides}
                   slideIndex={findLightboxIndex(item.image)}
                   fill
-                  unoptimized
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-contain"
-                  wrapperClassName="h-full w-full"
+                  loading="lazy"
+                  className="object-cover"
+                  wrapperClassName="absolute inset-0 h-full w-full"
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
@@ -96,10 +81,7 @@ export default function MenuShowcaseSection() {
                   </p>
                 ) : null}
                 {hasMenuPrice(item) ? (
-                  <p
-                    data-price
-                    className="mt-4 font-sans text-lg font-semibold text-orange opacity-0"
-                  >
+                  <p className="mt-4 font-sans text-lg font-semibold text-orange">
                     {item.price}
                   </p>
                 ) : null}
